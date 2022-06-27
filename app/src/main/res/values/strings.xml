@@ -1,3 +1,12 @@
 <resources>
     <string name="app_name">SFSArteryApp</string>
+
+    <!-- 로그인 -->
+    <string name="main_app_name">SFS</string>
+    <string name="login_id_hint">아이디</string>
+    <string name="login_pw_hint">비밀번호</string>
+    <string name="login_save_id">아이디 저장</string>
+    <string name="login_btn">로그인</string>
+    <string name="login_sign_in">회원가입</string>
+    <string name="login_company_code_hint">회사코드 입력</string>
 </resources>

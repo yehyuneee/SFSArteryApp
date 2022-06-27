@@ -1,17 +1,192 @@
 <?xml version="1.0" encoding="utf-8"?>
-<layout>
+<layout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools">
 
     <data>
+
         <variable
             name="viewmodel"
             type="com.sfs.artery.certification.app.viewmodel.LoginViewModel" />
     </data>
 
-    <androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
-        xmlns:tools="http://schemas.android.com/tools"
+    <androidx.constraintlayout.widget.ConstraintLayout
         android:layout_width="match_parent"
         android:layout_height="match_parent"
         tools:context=".activity.LoginActivity">
+
+        <androidx.constraintlayout.widget.ConstraintLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_margin="@dimen/dp_size_50"
+            app:layout_constraintBottom_toBottomOf="parent"
+            app:layout_constraintLeft_toLeftOf="parent"
+            app:layout_constraintRight_toRightOf="parent"
+            app:layout_constraintTop_toTopOf="parent">
+
+            <androidx.appcompat.widget.AppCompatTextView
+                android:id="@+id/login_title_text"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="@string/main_app_name"
+                android:textColor="@color/main_bg_color"
+                android:textSize="@dimen/text_size_30"
+                android:textStyle="bold"
+                app:layout_constraintLeft_toLeftOf="parent"
+                app:layout_constraintRight_toRightOf="parent"
+                app:layout_constraintTop_toTopOf="parent" />
+
+
+            <androidx.appcompat.widget.LinearLayoutCompat
+                android:id="@+id/login_id_layout"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="28dp"
+                android:background="@drawable/edit_box_layout"
+                android:orientation="horizontal"
+                android:paddingLeft="@dimen/dp_size_15"
+                android:paddingTop="@dimen/dp_size_15"
+                android:paddingBottom="@dimen/dp_size_15"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toBottomOf="@+id/login_title_text">
+
+                <androidx.appcompat.widget.AppCompatEditText
+                    android:id="@+id/login_id_edit"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:background="@null"
+                    android:fontFamily="@font/leferi_font_family"
+                    android:hint="@string/login_id_hint"
+                    android:inputType="text"
+                    android:privateImeOptions="defaultInputmode=english"
+                    android:textColor="@color/black"
+                    android:textColorHint="@color/basic_hint_text_color2"
+                    android:textSize="@dimen/text_size_13" />
+            </androidx.appcompat.widget.LinearLayoutCompat>
+
+            <androidx.appcompat.widget.LinearLayoutCompat
+                android:id="@+id/login_pw_layout"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="@dimen/dp_size_10"
+                android:background="@drawable/edit_box_layout"
+                android:orientation="horizontal"
+                android:paddingLeft="@dimen/dp_size_15"
+                android:paddingTop="@dimen/dp_size_15"
+                android:paddingBottom="@dimen/dp_size_15"
+                app:layout_constraintTop_toBottomOf="@+id/login_id_layout">
+
+                <androidx.appcompat.widget.AppCompatEditText
+                    android:id="@+id/login_pw_edit"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:background="@null"
+                    android:fontFamily="@font/leferi_font_family"
+                    android:hint="@string/login_pw_hint"
+                    android:inputType="textPassword"
+                    android:textColor="@color/black"
+                    android:textColorHint="@color/basic_hint_text_color2"
+                    android:textSize="@dimen/text_size_13" />
+            </androidx.appcompat.widget.LinearLayoutCompat>
+
+            <androidx.appcompat.widget.LinearLayoutCompat
+                android:id="@+id/login_company_code_layout"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="@dimen/dp_size_10"
+                android:background="@drawable/edit_box_layout"
+                android:orientation="horizontal"
+                android:paddingLeft="@dimen/dp_size_15"
+                android:paddingTop="@dimen/dp_size_15"
+                android:paddingBottom="@dimen/dp_size_15"
+                app:layout_constraintTop_toBottomOf="@+id/login_pw_layout">
+
+                <androidx.appcompat.widget.AppCompatEditText
+                    android:id="@+id/login_company_code_edit"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:background="@null"
+                    android:fontFamily="@font/leferi_font_family"
+                    android:hint="@string/login_company_code_hint"
+                    android:inputType="text"
+                    android:privateImeOptions="defaultInputmode=english"
+                    android:textColor="@color/black"
+                    android:textColorHint="@color/basic_hint_text_color2"
+                    android:textSize="@dimen/text_size_13" />
+            </androidx.appcompat.widget.LinearLayoutCompat>
+
+            <androidx.appcompat.widget.LinearLayoutCompat
+                android:id="@+id/login_save_id_layout"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="@dimen/dp_size_3"
+                android:orientation="horizontal"
+                app:layout_constraintLeft_toLeftOf="parent"
+                app:layout_constraintTop_toBottomOf="@+id/login_company_code_layout">
+
+                <com.google.android.material.checkbox.MaterialCheckBox
+                    android:id="@+id/auto_login_chekbox"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:padding="@dimen/dp_size_0" />
+
+                <androidx.appcompat.widget.AppCompatTextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text="@string/login_save_id"
+                    android:textColor="@color/black"
+                    android:textSize="@dimen/text_size_14" />
+
+            </androidx.appcompat.widget.LinearLayoutCompat>
+
+            <androidx.appcompat.widget.LinearLayoutCompat
+                android:id="@+id/login_btn_layout"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="@dimen/dp_size_30"
+                android:background="@drawable/btn_box_layout"
+                android:orientation="horizontal"
+                android:paddingLeft="@dimen/dp_size_10"
+                android:paddingTop="@dimen/dp_size_15"
+                android:paddingBottom="@dimen/dp_size_15"
+                app:layout_constraintTop_toBottomOf="@+id/login_save_id_layout">
+
+                <com.google.android.material.textview.MaterialTextView
+                    android:id="@+id/login_btn_text"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:background="@null"
+                    android:text="@string/login_btn"
+                    android:textAlignment="center"
+                    android:textColor="@color/white"
+                    android:textSize="@dimen/text_size_14" />
+            </androidx.appcompat.widget.LinearLayoutCompat>
+
+            <androidx.appcompat.widget.LinearLayoutCompat
+                android:id="@+id/login_sign_in_layout"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="@dimen/dp_size_10"
+                android:background="@drawable/etc_btn_box_layout"
+                android:orientation="horizontal"
+                android:paddingLeft="@dimen/dp_size_10"
+                android:paddingTop="@dimen/dp_size_15"
+                android:paddingBottom="@dimen/dp_size_15"
+                app:layout_constraintTop_toBottomOf="@+id/login_btn_layout">
+
+                <com.google.android.material.textview.MaterialTextView
+                    android:id="@+id/login_sign_in_text"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:background="@null"
+                    android:text="@string/login_sign_in"
+                    android:textAlignment="center"
+                    android:textColor="@color/white"
+                    android:textSize="@dimen/text_size_14" />
+            </androidx.appcompat.widget.LinearLayoutCompat>
+        </androidx.constraintlayout.widget.ConstraintLayout>
+
 
     </androidx.constraintlayout.widget.ConstraintLayout>
 </layout>
