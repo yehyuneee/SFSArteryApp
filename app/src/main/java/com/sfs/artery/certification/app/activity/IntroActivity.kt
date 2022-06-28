@@ -5,6 +5,7 @@ import android.os.Bundle
 import android.os.Handler
 import android.os.Looper
 import com.sfs.artery.certification.app.R
+import com.sfs.artery.certification.app.extention.moveActivity
 import com.sfs.artery.certification.app.extention.startActivity
 
 class IntroActivity : Activity() {
@@ -14,7 +15,7 @@ class IntroActivity : Activity() {
 
         Handler(Looper.getMainLooper()).postDelayed(object : Runnable {
             override fun run() {
-                startActivity<LoginActivity>()
+                moveActivity<LoginActivity>()
             }
         }, 1000)
     }

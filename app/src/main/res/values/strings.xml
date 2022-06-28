@@ -9,4 +9,18 @@
     <string name="login_btn">로그인</string>
     <string name="login_sign_in">회원가입</string>
     <string name="login_company_code_hint">회사코드 입력</string>
+
+    <!-- 회원가입 -->
+    <string name="sign_in_id">아이디</string>
+    <string name="sign_in_overlap_chk">중복확인</string>
+    <string name="sign_in_pw">비밀번호</string>
+    <string name="sign_in_pw_confirm">비밀번호 확인</string>
+    <string name="sign_in_pw_confirm_error">비밀번호가 일치하지 않습니다.</string>
+    <string name="sign_in_company_code">회사코드</string>
+    <string name="sign_in_company_code_confirm">회사코드 확인</string>
+    <string name="sign_in_company_code_confirm_fail">회사코드가 존재하지 않습니다.</string>
+    <string name="sign_in_artery_enroll">정맥등록</string>
+    <string name="sign_in_artery_enroll_btn">정맥등록하기</string>
+    <string name="sign_in_artery_enroll_success">등록되었습니다</string>
+    <string name="sign_in_btn">가입하기</string>
 </resources>

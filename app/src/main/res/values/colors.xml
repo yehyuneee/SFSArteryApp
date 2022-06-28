@@ -10,6 +10,7 @@
     <color name="basic_sub_text_color">#858c94</color>
     <color name="basic_red_color">#FF3300</color>
     <color name="basic_box_line_color">#EEEEEE</color>
+    <color name="edit_box_color">#EAEAEA</color>
 
     <color name="purple_200">#FFBB86FC</color>
     <color name="purple_500">#FF6200EE</color>
