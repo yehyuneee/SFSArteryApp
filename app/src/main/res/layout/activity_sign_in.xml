@@ -22,41 +22,114 @@
             app:layout_constraintRight_toRightOf="parent"
             app:layout_constraintTop_toTopOf="parent" />
 
-        <androidx.appcompat.widget.LinearLayoutCompat
+        <ScrollView
+            android:id="@+id/sign_in_scrollview"
             android:layout_width="match_parent"
-            android:layout_height="match_parent"
-            android:layout_marginLeft="@dimen/dp_size_20"
-            android:layout_marginTop="@dimen/dp_size_30"
-            android:layout_marginRight="@dimen/dp_size_20"
-            android:orientation="vertical"
+            android:layout_height="wrap_content"
             app:layout_constraintLeft_toLeftOf="parent"
             app:layout_constraintRight_toRightOf="parent"
-            app:layout_constraintTop_toBottomOf="@+id/header_view">
-
-            <androidx.appcompat.widget.AppCompatTextView
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:text="@string/sign_in_id"
-                android:textColor="@color/black"
-                android:textSize="@dimen/text_size_14" />
+            app:layout_constraintTop_toBottomOf="@id/header_view">
 
             <androidx.appcompat.widget.LinearLayoutCompat
+                android:id="@+id/sign_in_layout"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:layout_marginTop="@dimen/dp_size_10"
-                android:orientation="horizontal">
+                android:layout_marginLeft="@dimen/dp_size_20"
+                android:layout_marginTop="@dimen/dp_size_30"
+                android:layout_marginRight="@dimen/dp_size_20"
+                android:orientation="vertical">
 
-                <androidx.appcompat.widget.LinearLayoutCompat
+                <!-- 아이디 START -->
+                <androidx.appcompat.widget.AppCompatTextView
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
+                    android:text="@string/sign_in_id"
+                    android:textColor="@color/black"
+                    android:textSize="@dimen/text_size_14" />
+
+                <androidx.appcompat.widget.LinearLayoutCompat
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_marginTop="@dimen/dp_size_10"
+                    android:orientation="horizontal">
+
+                    <androidx.appcompat.widget.LinearLayoutCompat
+                        android:layout_width="@dimen/dp_size_0"
+                        android:layout_height="wrap_content"
+                        android:layout_weight="0.7"
+                        android:background="@drawable/sign_edit_box_layout"
+                        android:orientation="horizontal">
+
+                        <androidx.appcompat.widget.AppCompatEditText
+                            android:id="@+id/sign_in_id_edit"
+                            android:layout_width="match_parent"
+                            android:layout_height="wrap_content"
+                            android:background="@null"
+                            android:hint="@string/sign_in_id"
+                            android:paddingLeft="@dimen/dp_size_10"
+                            android:paddingTop="@dimen/dp_size_10"
+                            android:paddingBottom="@dimen/dp_size_10"
+                            android:textColorHint="@color/basic_hint_text_color2"
+                            android:textSize="@dimen/text_size_14" />
+
+                    </androidx.appcompat.widget.LinearLayoutCompat>
+
+                    <androidx.appcompat.widget.LinearLayoutCompat
+                        android:id="@+id/sign_in_overlap_btn"
+                        android:layout_width="@dimen/dp_size_0"
+                        android:layout_height="wrap_content"
+                        android:layout_marginLeft="@dimen/dp_size_10"
+                        android:layout_weight="0.4"
+                        android:background="@drawable/sign_btn_box_layout"
+                        android:gravity="center">
+
+                        <androidx.appcompat.widget.AppCompatTextView
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:paddingTop="@dimen/dp_size_10"
+                            android:paddingBottom="@dimen/dp_size_10"
+                            android:text="@string/sign_in_overlap_chk"
+                            android:textAlignment="center"
+                            android:textColor="@color/white"
+                            android:textSize="@dimen/text_size_13" />
+
+                    </androidx.appcompat.widget.LinearLayoutCompat>
+
+                </androidx.appcompat.widget.LinearLayoutCompat>
+
+                <androidx.appcompat.widget.AppCompatTextView
+                    android:id="@+id/sign_in_overlap_confirm_text"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_marginTop="@dimen/dp_size_5"
+                    android:text="@string/sign_in_overlap_comfirm"
+                    android:textColor="@color/basic_sub_text_color"
+                    android:textSize="@dimen/text_size_12"
+                    android:visibility="gone" />
+                <!-- 아이디 END -->
+
+                <!-- 비밀번호 START -->
+                <androidx.appcompat.widget.AppCompatTextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_marginTop="@dimen/dp_size_20"
+                    android:text="@string/sign_in_pw"
+                    android:textColor="@color/black"
+                    android:textSize="@dimen/text_size_14" />
+
+                <androidx.appcompat.widget.LinearLayoutCompat
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_marginTop="@dimen/dp_size_10"
                     android:background="@drawable/sign_edit_box_layout"
                     android:orientation="horizontal">
 
                     <androidx.appcompat.widget.AppCompatEditText
+                        android:id="@+id/sign_in_pw_edit"
                         android:layout_width="match_parent"
                         android:layout_height="wrap_content"
                         android:background="@null"
-                        android:hint="@string/sign_in_id"
+                        android:hint="@string/sign_in_pw"
                         android:paddingLeft="@dimen/dp_size_10"
                         android:paddingTop="@dimen/dp_size_10"
                         android:paddingBottom="@dimen/dp_size_10"
@@ -64,7 +137,276 @@
                         android:textSize="@dimen/text_size_14" />
 
                 </androidx.appcompat.widget.LinearLayoutCompat>
+                <!-- 비밀번호 END -->
+
+                <!-- 비밀번호 확인 START -->
+                <androidx.appcompat.widget.LinearLayoutCompat
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_marginTop="@dimen/dp_size_5"
+                    android:background="@drawable/sign_edit_box_layout"
+                    android:orientation="horizontal">
+
+                    <androidx.appcompat.widget.AppCompatEditText
+                        android:id="@+id/sign_in_pw_confirm_edit"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:background="@null"
+                        android:hint="@string/sign_in_pw_confirm"
+                        android:paddingLeft="@dimen/dp_size_10"
+                        android:paddingTop="@dimen/dp_size_10"
+                        android:paddingBottom="@dimen/dp_size_10"
+                        android:textColorHint="@color/basic_hint_text_color2"
+                        android:textSize="@dimen/text_size_14" />
+
+                </androidx.appcompat.widget.LinearLayoutCompat>
+
+                <androidx.appcompat.widget.AppCompatTextView
+                    android:id="@+id/sign_in_pw_confirm_text"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_marginTop="@dimen/dp_size_5"
+                    android:text="@string/sign_in_pw_confirm_error"
+                    android:textColor="@color/basic_sub_text_color"
+                    android:textSize="@dimen/text_size_12"
+                    android:visibility="gone" />
+                <!-- 비밀번호 확인 END -->
+
+
+                <!-- 이름 START-->
+                <androidx.appcompat.widget.AppCompatTextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_marginTop="@dimen/dp_size_20"
+                    android:text="@string/sign_in_name"
+                    android:textColor="@color/black"
+                    android:textSize="@dimen/text_size_14" />
+
+                <androidx.appcompat.widget.LinearLayoutCompat
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_marginTop="@dimen/dp_size_10"
+                    android:background="@drawable/sign_edit_box_layout"
+                    android:orientation="horizontal">
+
+                    <androidx.appcompat.widget.AppCompatEditText
+                        android:id="@+id/sign_in_name_edit"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:background="@null"
+                        android:hint="@string/sign_in_name"
+                        android:paddingLeft="@dimen/dp_size_10"
+                        android:paddingTop="@dimen/dp_size_10"
+                        android:paddingBottom="@dimen/dp_size_10"
+                        android:textColorHint="@color/basic_hint_text_color2"
+                        android:textSize="@dimen/text_size_14" />
+
+                </androidx.appcompat.widget.LinearLayoutCompat>
+                <!-- 이름 END-->
+
+                <!-- 전화번호 START-->
+                <androidx.appcompat.widget.AppCompatTextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_marginTop="@dimen/dp_size_20"
+                    android:text="@string/sign_in_number"
+                    android:textColor="@color/black"
+                    android:textSize="@dimen/text_size_14" />
+
+                <androidx.appcompat.widget.LinearLayoutCompat
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_marginTop="@dimen/dp_size_10"
+                    android:background="@drawable/sign_edit_box_layout"
+                    android:orientation="horizontal">
+
+                    <androidx.appcompat.widget.AppCompatEditText
+                        android:id="@+id/sign_in_number_edit"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:background="@null"
+                        android:hint="@string/sign_in_number"
+                        android:paddingLeft="@dimen/dp_size_10"
+                        android:paddingTop="@dimen/dp_size_10"
+                        android:paddingBottom="@dimen/dp_size_10"
+                        android:textColorHint="@color/basic_hint_text_color2"
+                        android:textSize="@dimen/text_size_14" />
+
+                </androidx.appcompat.widget.LinearLayoutCompat>
+                <!-- 전화번호 END-->
+
+
+                <!-- 회사코드 START -->
+                <androidx.appcompat.widget.AppCompatTextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_marginTop="@dimen/dp_size_20"
+                    android:text="@string/sign_in_company_code"
+                    android:textColor="@color/black"
+                    android:textSize="@dimen/text_size_14" />
+
+                <androidx.appcompat.widget.LinearLayoutCompat
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_marginTop="@dimen/dp_size_10"
+                    android:orientation="horizontal">
+
+                    <androidx.appcompat.widget.LinearLayoutCompat
+                        android:layout_width="@dimen/dp_size_0"
+                        android:layout_height="wrap_content"
+                        android:layout_weight="0.7"
+                        android:background="@drawable/sign_edit_box_layout"
+                        android:orientation="horizontal">
+
+                        <androidx.appcompat.widget.AppCompatEditText
+                            android:id="@+id/sign_in_company_code_edit"
+                            android:layout_width="match_parent"
+                            android:layout_height="wrap_content"
+                            android:background="@null"
+                            android:hint="@string/login_company_code_hint"
+                            android:paddingLeft="@dimen/dp_size_10"
+                            android:paddingTop="@dimen/dp_size_10"
+                            android:paddingBottom="@dimen/dp_size_10"
+                            android:textColorHint="@color/basic_hint_text_color2"
+                            android:textSize="@dimen/text_size_14" />
+
+                    </androidx.appcompat.widget.LinearLayoutCompat>
+
+                    <androidx.appcompat.widget.LinearLayoutCompat
+                        android:id="@+id/company_code_confirm_btn"
+                        android:layout_width="@dimen/dp_size_0"
+                        android:layout_height="wrap_content"
+                        android:layout_marginLeft="@dimen/dp_size_10"
+                        android:layout_weight="0.4"
+                        android:background="@drawable/sign_btn_box_layout"
+                        android:gravity="center">
+
+                        <androidx.appcompat.widget.AppCompatTextView
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:paddingTop="@dimen/dp_size_10"
+                            android:paddingBottom="@dimen/dp_size_10"
+                            android:text="@string/sign_in_company_code_confirm"
+                            android:textAlignment="center"
+                            android:textColor="@color/white"
+                            android:textSize="@dimen/text_size_13" />
+
+                    </androidx.appcompat.widget.LinearLayoutCompat>
+
+                </androidx.appcompat.widget.LinearLayoutCompat>
+
+                <androidx.appcompat.widget.AppCompatTextView
+                    android:id="@+id/company_code_confirm_text"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_marginTop="@dimen/dp_size_5"
+                    android:text="@string/sign_in_company_code_confirm_fail"
+                    android:textColor="@color/basic_sub_text_color"
+                    android:textSize="@dimen/text_size_12"
+                    android:visibility="gone" />
+                <!-- 회사코드 END -->
+
+                <!-- 정맥 등록 START -->
+                <androidx.appcompat.widget.AppCompatTextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_marginTop="@dimen/dp_size_20"
+                    android:text="@string/sign_in_artery_enroll"
+                    android:textColor="@color/black"
+                    android:textSize="@dimen/text_size_14" />
+
+                <androidx.appcompat.widget.LinearLayoutCompat
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_marginTop="@dimen/dp_size_10"
+                    android:orientation="horizontal">
+
+                    <androidx.appcompat.widget.LinearLayoutCompat
+                        android:layout_width="0dp"
+                        android:layout_height="wrap_content"
+                        android:layout_weight="1"
+                        android:background="@drawable/artery_enroll_box_layout"
+                        android:orientation="vertical"
+                        android:paddingTop="@dimen/dp_size_20"
+                        android:paddingBottom="@dimen/dp_size_20">
+
+                        <androidx.appcompat.widget.AppCompatImageView
+                            android:layout_width="@dimen/dp_size_30"
+                            android:layout_height="@dimen/dp_size_30"
+                            android:layout_gravity="center"
+                            android:src="@drawable/left_hand_icon" />
+
+                        <androidx.appcompat.widget.AppCompatTextView
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:layout_gravity="center"
+                            android:layout_marginTop="@dimen/dp_size_10"
+                            android:text="@string/sign_in_artery_enroll_left_hand"
+                            android:textColor="@color/black"
+                            android:textSize="@dimen/dp_size_15" />
+                    </androidx.appcompat.widget.LinearLayoutCompat>
+
+                    <androidx.appcompat.widget.LinearLayoutCompat
+                        android:layout_width="0dp"
+                        android:layout_height="wrap_content"
+                        android:layout_marginLeft="@dimen/dp_size_20"
+                        android:layout_weight="1"
+                        android:background="@drawable/artery_enroll_box_layout"
+                        android:orientation="vertical"
+                        android:paddingTop="@dimen/dp_size_20"
+                        android:paddingBottom="@dimen/dp_size_20">
+
+                        <androidx.appcompat.widget.AppCompatImageView
+                            android:layout_width="@dimen/dp_size_30"
+                            android:layout_height="@dimen/dp_size_30"
+                            android:layout_gravity="center"
+                            android:src="@drawable/right_hand_icon" />
+
+                        <androidx.appcompat.widget.AppCompatTextView
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:layout_gravity="center"
+                            android:layout_marginTop="@dimen/dp_size_10"
+                            android:text="@string/sign_in_artery_enroll_right_hand"
+                            android:textColor="@color/black"
+                            android:textSize="@dimen/dp_size_15" />
+                    </androidx.appcompat.widget.LinearLayoutCompat>
+                </androidx.appcompat.widget.LinearLayoutCompat>
+
+                <androidx.appcompat.widget.AppCompatTextView
+                    android:id="@+id/artery_confirm_text"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_marginTop="@dimen/dp_size_5"
+                    android:text="@string/sign_in_artery_enroll_success"
+                    android:textColor="@color/basic_sub_text_color"
+                    android:textSize="@dimen/text_size_12"
+                    android:visibility="gone" />
+                <!-- 정맥 등록 END -->
+
+
+                <!-- 가입하기 START -->
+                <androidx.appcompat.widget.LinearLayoutCompat
+                    android:id="@+id/sign_in_btn"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_marginTop="@dimen/dp_size_30"
+                    android:layout_marginBottom="@dimen/dp_size_20"
+                    android:background="@drawable/disable_btn_box_layout"
+                    android:gravity="center">
+
+                    <androidx.appcompat.widget.AppCompatTextView
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_margin="@dimen/dp_size_15"
+                        android:text="@string/sign_in_btn"
+                        android:textAlignment="center"
+                        android:textColor="@color/white"
+                        android:textSize="@dimen/text_size_15"
+                        android:textStyle="bold" />
+
+                </androidx.appcompat.widget.LinearLayoutCompat>
             </androidx.appcompat.widget.LinearLayoutCompat>
-        </androidx.appcompat.widget.LinearLayoutCompat>
+        </ScrollView>
     </androidx.constraintlayout.widget.ConstraintLayout>
 </layout>

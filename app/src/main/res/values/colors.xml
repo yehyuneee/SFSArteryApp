@@ -2,6 +2,7 @@
 <resources>
     <!-- App Color -->
     <color name="main_bg_color">#80C000</color>
+    <color name="main_bg_btn_color">#CEF279</color>
     <color name="black">#FF000000</color>
     <color name="white">#FFFFFFFF</color>
     <color name="basic_line_color">#F6F6F6F6</color>

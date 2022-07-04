@@ -10,14 +10,11 @@ import dagger.hilt.android.AndroidEntryPoint
 
 @AndroidEntryPoint
 class SignInActivity : BaseActivity<ActivitySignInBinding, SignInViewModel>() {
-
-    // ui 참고 https://www.pinterest.co.kr/pin/283656476522100516/
     override val layoutId: Int = R.layout.activity_sign_in
     override val variable: Int = BR.viewmodel
     override val viewModel: SignInViewModel by viewModels()
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
-        setContentView(R.layout.activity_sign_in)
     }
 }

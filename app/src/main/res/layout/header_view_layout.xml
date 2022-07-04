@@ -15,8 +15,8 @@
 
         <androidx.appcompat.widget.AppCompatImageView
             android:id="@+id/header_back_btn"
-            android:layout_width="@dimen/dp_size_30"
-            android:layout_height="@dimen/dp_size_30"
+            android:layout_width="@dimen/dp_size_20"
+            android:layout_height="@dimen/dp_size_20"
             android:layout_marginLeft="@dimen/dp_size_15"
             android:src="@drawable/black_back_arrow"
             app:layout_constraintBottom_toBottomOf="parent"
