@@ -1,5 +1,8 @@
 <resources>
+    <!-- 공통 -->
     <string name="app_name">SFSArteryApp</string>
+    <string name="confirm_text">확인</string>
+    <string name="cancel_text">취소</string>
 
     <!-- 로그인 -->
     <string name="main_app_name">SFS</string>

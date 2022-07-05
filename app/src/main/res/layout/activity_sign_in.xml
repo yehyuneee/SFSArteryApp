@@ -18,16 +18,15 @@
             android:id="@+id/header_view"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            app:layout_constraintLeft_toLeftOf="parent"
-            app:layout_constraintRight_toRightOf="parent"
             app:layout_constraintTop_toTopOf="parent" />
 
         <ScrollView
             android:id="@+id/sign_in_scrollview"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            app:layout_constraintLeft_toLeftOf="parent"
-            app:layout_constraintRight_toRightOf="parent"
+            android:layout_width="@dimen/dp_size_0"
+            android:layout_height="@dimen/dp_size_0"
+            app:layout_constraintBottom_toBottomOf="parent"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toBottomOf="@id/header_view">
 
             <androidx.appcompat.widget.LinearLayoutCompat
@@ -35,9 +34,9 @@
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:layout_marginLeft="@dimen/dp_size_20"
-                android:layout_marginTop="@dimen/dp_size_30"
                 android:layout_marginRight="@dimen/dp_size_20"
-                android:orientation="vertical">
+                android:orientation="vertical"
+                android:paddingTop="@dimen/dp_size_30">
 
                 <!-- 아이디 START -->
                 <androidx.appcompat.widget.AppCompatTextView
@@ -383,8 +382,6 @@
                     android:textSize="@dimen/text_size_12"
                     android:visibility="gone" />
                 <!-- 정맥 등록 END -->
-
-
                 <!-- 가입하기 START -->
                 <androidx.appcompat.widget.LinearLayoutCompat
                     android:id="@+id/sign_in_btn"
@@ -404,7 +401,6 @@
                         android:textColor="@color/white"
                         android:textSize="@dimen/text_size_15"
                         android:textStyle="bold" />
-
                 </androidx.appcompat.widget.LinearLayoutCompat>
             </androidx.appcompat.widget.LinearLayoutCompat>
         </ScrollView>
