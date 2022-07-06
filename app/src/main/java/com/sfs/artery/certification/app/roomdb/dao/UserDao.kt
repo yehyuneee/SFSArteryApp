@@ -5,6 +5,7 @@ import androidx.room.Insert
 import androidx.room.OnConflictStrategy
 import androidx.room.Query
 import com.sfs.artery.certification.app.roomdb.entity.User
+import io.reactivex.Single
 
 @Dao
 interface UserDao {
@@ -12,8 +13,8 @@ interface UserDao {
     fun insertUser(user: User)
 
     @Query("SELECT userInfo.* FROM userinfo JOIN userSearch ON (userSearch.userId == userInfo.userId) WHERE userSearch MATCH :id")
-    fun searchId(id: String): User
+    fun searchId(id: String): Single<User>
 
     @Query("SELECT userInfo.* FROM userinfo JOIN userSearch ON (userSearch.userPw == userInfo.userPw) WHERE userSearch MATCH :pw")
-    fun searchPw(pw: String): User
+    fun searchPw(pw: String): Single<User>
 }

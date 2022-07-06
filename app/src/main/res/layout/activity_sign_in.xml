@@ -129,6 +129,7 @@
                         android:layout_height="wrap_content"
                         android:background="@null"
                         android:hint="@string/sign_in_pw"
+                        android:maxLength="20"
                         android:paddingLeft="@dimen/dp_size_10"
                         android:paddingTop="@dimen/dp_size_10"
                         android:paddingBottom="@dimen/dp_size_10"
@@ -152,6 +153,7 @@
                         android:layout_height="wrap_content"
                         android:background="@null"
                         android:hint="@string/sign_in_pw_confirm"
+                        android:maxLength="20"
                         android:paddingLeft="@dimen/dp_size_10"
                         android:paddingTop="@dimen/dp_size_10"
                         android:paddingBottom="@dimen/dp_size_10"
@@ -194,6 +196,7 @@
                         android:layout_height="wrap_content"
                         android:background="@null"
                         android:hint="@string/sign_in_name"
+                        android:maxLength="20"
                         android:paddingLeft="@dimen/dp_size_10"
                         android:paddingTop="@dimen/dp_size_10"
                         android:paddingBottom="@dimen/dp_size_10"
@@ -225,6 +228,7 @@
                         android:layout_height="wrap_content"
                         android:background="@null"
                         android:hint="@string/sign_in_number"
+                        android:maxLength="10"
                         android:paddingLeft="@dimen/dp_size_10"
                         android:paddingTop="@dimen/dp_size_10"
                         android:paddingBottom="@dimen/dp_size_10"
@@ -233,8 +237,6 @@
 
                 </androidx.appcompat.widget.LinearLayoutCompat>
                 <!-- 전화번호 END-->
-
-
                 <!-- 회사코드 START -->
                 <androidx.appcompat.widget.AppCompatTextView
                     android:layout_width="wrap_content"
@@ -263,6 +265,7 @@
                             android:layout_height="wrap_content"
                             android:background="@null"
                             android:hint="@string/login_company_code_hint"
+                            android:maxLength="10"
                             android:paddingLeft="@dimen/dp_size_10"
                             android:paddingTop="@dimen/dp_size_10"
                             android:paddingBottom="@dimen/dp_size_10"
