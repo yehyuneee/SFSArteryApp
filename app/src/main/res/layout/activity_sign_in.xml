@@ -68,6 +68,7 @@
                             android:paddingLeft="@dimen/dp_size_10"
                             android:paddingTop="@dimen/dp_size_10"
                             android:paddingBottom="@dimen/dp_size_10"
+                            android:text="@={viewmodel.user_id}"
                             android:textColorHint="@color/basic_hint_text_color2"
                             android:textSize="@dimen/text_size_14" />
 
@@ -133,6 +134,7 @@
                         android:paddingLeft="@dimen/dp_size_10"
                         android:paddingTop="@dimen/dp_size_10"
                         android:paddingBottom="@dimen/dp_size_10"
+                        android:text="@={viewmodel.user_pw}"
                         android:textColorHint="@color/basic_hint_text_color2"
                         android:textSize="@dimen/text_size_14" />
 
@@ -157,6 +159,7 @@
                         android:paddingLeft="@dimen/dp_size_10"
                         android:paddingTop="@dimen/dp_size_10"
                         android:paddingBottom="@dimen/dp_size_10"
+                        android:text="@={viewmodel.user_pw_confirm}"
                         android:textColorHint="@color/basic_hint_text_color2"
                         android:textSize="@dimen/text_size_14" />
 
@@ -200,6 +203,7 @@
                         android:paddingLeft="@dimen/dp_size_10"
                         android:paddingTop="@dimen/dp_size_10"
                         android:paddingBottom="@dimen/dp_size_10"
+                        android:text="@={viewmodel.user_name}"
                         android:textColorHint="@color/basic_hint_text_color2"
                         android:textSize="@dimen/text_size_14" />
 
@@ -232,6 +236,7 @@
                         android:paddingLeft="@dimen/dp_size_10"
                         android:paddingTop="@dimen/dp_size_10"
                         android:paddingBottom="@dimen/dp_size_10"
+                        android:text="@={viewmodel.user_phonenum}"
                         android:textColorHint="@color/basic_hint_text_color2"
                         android:textSize="@dimen/text_size_14" />
 
@@ -269,6 +274,7 @@
                             android:paddingLeft="@dimen/dp_size_10"
                             android:paddingTop="@dimen/dp_size_10"
                             android:paddingBottom="@dimen/dp_size_10"
+                            android:text="@={viewmodel.user_company_code}"
                             android:textColorHint="@color/basic_hint_text_color2"
                             android:textSize="@dimen/text_size_14" />
 
@@ -392,8 +398,9 @@
                     android:layout_height="wrap_content"
                     android:layout_marginTop="@dimen/dp_size_30"
                     android:layout_marginBottom="@dimen/dp_size_20"
-                    android:background="@drawable/disable_btn_box_layout"
-                    android:gravity="center">
+                    android:background="@drawable/btn_box_layout"
+                    android:gravity="center"
+                    android:onClick="@{()->viewmodel.signEssentialFormCheck()}">
 
                     <androidx.appcompat.widget.AppCompatTextView
                         android:layout_width="wrap_content"

@@ -24,6 +24,25 @@ class SignInActivity : BaseActivity<ActivitySignInBinding, SignInViewModel>(),
         super.onCreate(savedInstanceState)
 
         initView()
+
+        with(viewModel) {
+            signEssentialChk.observe(this@SignInActivity, { errMsg ->
+                // 필수값 체크
+                // 에러사항들 알림팝업 노출
+                showCommonDialog(AlertDialogBtnType.ONE,
+                    this@SignInActivity.resources.getString(errMsg.msg))
+
+                signInStatus.postValue(false)
+            })
+
+            signInStatus.observe(this@SignInActivity, { chkAll ->
+                if (chkAll) {
+                    // 필수값 체크 모두 되었을 경우 회원가입 진행
+                    // TODO 현재는 DB상에 넣지만, 추후 서버에 저장
+                    doSignIn()
+                }
+            })
+        }
     }
 
     fun initView() {
@@ -45,7 +64,7 @@ class SignInActivity : BaseActivity<ActivitySignInBinding, SignInViewModel>(),
                         showCommonDialog(AlertDialogBtnType.ONE, "사용가능한 아이디입니다.")
                     }
                 } else {
-                    showCommonDialog(AlertDialogBtnType.ONE, "아이디를 입력해주세요.")
+
                 }
             }
         }
