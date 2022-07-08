@@ -68,6 +68,7 @@
                             android:paddingLeft="@dimen/dp_size_10"
                             android:paddingTop="@dimen/dp_size_10"
                             android:paddingBottom="@dimen/dp_size_10"
+                            android:privateImeOptions="defaultInputmode=english"
                             android:text="@={viewmodel.user_id}"
                             android:textColorHint="@color/basic_hint_text_color2"
                             android:textSize="@dimen/text_size_14" />
@@ -234,8 +235,8 @@
                         android:layout_height="wrap_content"
                         android:background="@null"
                         android:hint="@string/sign_in_number"
-                        android:maxLength="13"
                         android:inputType="phone"
+                        android:maxLength="13"
                         android:paddingLeft="@dimen/dp_size_10"
                         android:paddingTop="@dimen/dp_size_10"
                         android:paddingBottom="@dimen/dp_size_10"
@@ -277,6 +278,7 @@
                             android:paddingLeft="@dimen/dp_size_10"
                             android:paddingTop="@dimen/dp_size_10"
                             android:paddingBottom="@dimen/dp_size_10"
+                            android:privateImeOptions="defaultInputmode=english"
                             android:text="@={viewmodel.user_company_code}"
                             android:textColorHint="@color/basic_hint_text_color2"
                             android:textSize="@dimen/text_size_14" />

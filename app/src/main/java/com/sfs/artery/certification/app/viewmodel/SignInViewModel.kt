@@ -32,12 +32,16 @@ class SignInViewModel @Inject constructor(
     // 아이디 존재 여부
     val idValiableChk = MutableLiveData<Boolean>()
     var idOverlapId: Boolean = false
+
     // 회사코드 확인 여부
     val isCompanyCodeConfirm = MutableLiveData<Boolean>()
+
     // 정맥 타입
     val arteryType: MutableLiveData<ArteryType> by lazy { MutableLiveData<ArteryType>() }
+
     // 가입 필수값 체크
     val signEssentialChk: MutableLiveData<SignFormErrorType> by lazy { MutableLiveData<SignFormErrorType>() }
+
     // 가입 성공 여부
     val signInStatus = MutableLiveData<Boolean>()
 

@@ -37,8 +37,6 @@ class SignInActivity : BaseActivity<ActivitySignInBinding, SignInViewModel>(),
                 // 에러사항들 알림팝업 노출
                 showCommonDialog(AlertDialogBtnType.ONE,
                     this@SignInActivity.resources.getString(errMsg.msg))
-
-                signInStatus.postValue(false)
             })
 
             signInStatus.observe(this@SignInActivity, { chkAll ->
