@@ -1,6 +1,7 @@
 package com.sfs.artery.certification.app.activity
 
 import android.os.Bundle
+import android.telephony.PhoneNumberFormattingTextWatcher
 import android.text.Editable
 import android.text.TextWatcher
 import android.view.View
@@ -9,6 +10,7 @@ import com.sfs.artery.certification.app.BR
 import com.sfs.artery.certification.app.R
 import com.sfs.artery.certification.app.common.AlertDialogBtnType
 import com.sfs.artery.certification.app.databinding.ActivitySignInBinding
+import com.sfs.artery.certification.app.util.CommonDialogListener
 import com.sfs.artery.certification.app.view.HeaderView
 import com.sfs.artery.certification.app.viewmodel.SignInViewModel
 import dagger.hilt.android.AndroidEntryPoint
@@ -19,6 +21,10 @@ class SignInActivity : BaseActivity<ActivitySignInBinding, SignInViewModel>(),
     override val layoutId: Int = R.layout.activity_sign_in
     override val variable: Int = BR.viewmodel
     override val viewModel: SignInViewModel by viewModels()
+
+    private var mUserId = ""
+
+    private val mActivity = this@SignInActivity
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
@@ -36,21 +42,54 @@ class SignInActivity : BaseActivity<ActivitySignInBinding, SignInViewModel>(),
             })
 
             signInStatus.observe(this@SignInActivity, { chkAll ->
+                // 회원가입 여부
                 if (chkAll) {
-                    // 필수값 체크 모두 되었을 경우 회원가입 진행
-                    // TODO 현재는 DB상에 넣지만, 추후 서버에 저장
-                    doSignIn()
+                    showCommonDialog(
+                        AlertDialogBtnType.ONE,
+                        "회원가입이 완료되었습니다.")
+                        .let {
+                            it.dialogClick(object : CommonDialogListener {
+                                override fun onConfirm() {
+                                    finish()
+                                }
+
+                                override fun onCancle() {
+                                    it.dismiss()
+                                }
+                            })
+                        }
+                } else {
+                    showCommonDialog(AlertDialogBtnType.ONE, "회원가입에 실패하였습니다.")
                 }
+            })
+
+            idValiableChk.observe(this@SignInActivity, { isOverlap ->
+                // 중복여부 체크
+                if (!isOverlap) {
+                    showCommonDialog(AlertDialogBtnType.ONE, "중복된 아이디입니다.")
+                } else {
+                    showCommonDialog(AlertDialogBtnType.ONE, "사용가능한 아이디입니다.")
+                }
+            })
+
+            user_id.observe(this@SignInActivity, { id ->
+                if (!mUserId.equals(id)) {
+                    idOverlapId = false
+                }
+                mUserId = id
             })
         }
     }
 
     fun initView() {
-        viewBinding!!.headerView.setHeader(HeaderView.HEADER_BACK,
-            applicationContext.getString(R.string.login_sign_in),
-            this@SignInActivity)
+        with(viewBinding!!) {
+            headerView.setHeader(HeaderView.HEADER_BACK,
+                applicationContext.getString(R.string.login_sign_in),
+                this@SignInActivity)
 
-        viewBinding!!.signInOverlapBtn.setOnClickListener(this)
+            signInNumberEdit.addTextChangedListener(PhoneNumberFormattingTextWatcher())
+            signInOverlapBtn.setOnClickListener(mActivity)
+        }
     }
 
     override fun onClick(view: View?) {
@@ -58,13 +97,9 @@ class SignInActivity : BaseActivity<ActivitySignInBinding, SignInViewModel>(),
             viewBinding!!.signInOverlapBtn.id -> {
                 val id = viewBinding!!.signInIdEdit.text
                 if (id?.isEmpty() == false) {
-                    if (viewModel.isEffectiveId(id.toString())) {
-                        showCommonDialog(AlertDialogBtnType.ONE, "중복된 아이디입니다.")
-                    } else {
-                        showCommonDialog(AlertDialogBtnType.ONE, "사용가능한 아이디입니다.")
-                    }
+                    viewModel.isEffectiveId()
                 } else {
-
+                    showCommonDialog(AlertDialogBtnType.ONE, "아이디를 입력해주세요.")
                 }
             }
         }

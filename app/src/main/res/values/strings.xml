@@ -27,6 +27,7 @@
     <string name="sign_in_name_empty">이름을 입력해주세요</string>
     <string name="sign_in_number">전화번호</string>
     <string name="sign_in_number_empty">전화번호를 입력해주세요</string>
+    <string name="sign_in_number_not_correct">전화번호를 정확히 입력해주세요</string>
     <string name="sign_in_pw_confirm_error">비밀번호가 일치하지 않습니다.</string>
     <string name="sign_in_company_code">회사코드</string>
     <string name="sign_in_company_code_empty">회사코드를 입력해주세요</string>

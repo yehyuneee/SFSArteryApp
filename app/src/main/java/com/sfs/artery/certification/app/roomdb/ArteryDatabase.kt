@@ -9,7 +9,7 @@ import com.sfs.artery.certification.app.roomdb.entity.User
 import com.sfs.artery.certification.app.roomdb.entity.UserSearchTemp
 
 @Database(entities = [User::class, UserSearchTemp::class], version = 1)
-abstract class ArteryDatabase : RoomDatabase(){
+abstract class ArteryDatabase : RoomDatabase() {
     abstract fun userDao(): UserDao
 
     companion object {
@@ -21,7 +21,7 @@ abstract class ArteryDatabase : RoomDatabase(){
                         context.applicationContext,
                         ArteryDatabase::class.java,
                         "arteryDatabase"
-                    ).build()
+                    ).fallbackToDestructiveMigration().build()
                 }
             }
 
