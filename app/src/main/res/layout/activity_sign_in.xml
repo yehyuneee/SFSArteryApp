@@ -335,6 +335,7 @@
                     android:orientation="horizontal">
 
                     <androidx.appcompat.widget.LinearLayoutCompat
+                        android:id="@+id/left_hand_artery_layout"
                         android:layout_width="0dp"
                         android:layout_height="wrap_content"
                         android:layout_weight="1"
@@ -360,6 +361,7 @@
                     </androidx.appcompat.widget.LinearLayoutCompat>
 
                     <androidx.appcompat.widget.LinearLayoutCompat
+                        android:id="@+id/right_hand_artery_layout"
                         android:layout_width="0dp"
                         android:layout_height="wrap_content"
                         android:layout_marginLeft="@dimen/dp_size_20"

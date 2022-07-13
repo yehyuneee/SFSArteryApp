@@ -1,6 +1,18 @@
 <?xml version="1.0" encoding="utf-8"?>
 <manifest xmlns:android="http://schemas.android.com/apk/res/android"
-    package="com.sfs.artery.certification.app" >
+    xmlns:tools="http://schemas.android.com/tools"
+    package="com.sfs.artery.certification.app">
+
+    <uses-permission android:name="android.permission.CAMERA" />
+    <uses-permission
+        android:name="android.permission.WRITE_EXTERNAL_STORAGE"
+        tools:ignore="ScopedStorage" />
+
+    <uses-feature android:name="android.hardware.camera" />
+    <uses-feature android:name="android.hardware.camera.autofocus" />
+    <uses-feature android:name="android.hardware.camera.flash" />
+
+    <supports-screens android:anyDensity="true" />
 
     <application
         android:name=".SFSApplication"
@@ -9,13 +21,16 @@
         android:label="@string/app_name"
         android:roundIcon="@mipmap/ic_launcher_round"
         android:supportsRtl="true"
-        android:theme="@style/Theme.SFSArteryApp" >
+        android:theme="@style/Theme.SFSArteryApp">
+        <activity
+            android:name=".activity.ArteryActivity"
+            android:exported="false" />
         <activity
             android:name=".activity.SignInActivity"
             android:exported="false" />
         <activity
             android:name=".activity.IntroActivity"
-            android:exported="true" >
+            android:exported="true">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
 

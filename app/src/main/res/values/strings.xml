@@ -36,8 +36,28 @@
     <string name="sign_in_company_code_confirm_fail">회사코드가 존재하지 않습니다.</string>
     <string name="sign_in_artery_enroll">정맥등록</string>
     <string name="sign_in_artery_enroll_btn">정맥등록하기</string>
+    <string name="sign_in_artery_enroll_nothing">정맥 인증이 등록되지 않았습니다.</string>
     <string name="sign_in_artery_enroll_left_hand">왼손</string>
     <string name="sign_in_artery_enroll_right_hand">오른손</string>
-    <string name="sign_in_artery_enroll_success">%s이 등록되었습니다</string>
+    <string name="sign_in_artery_enroll_success">%s 정맥이 등록되었습니다</string>
     <string name="sign_in_btn">가입하기</string>
+
+    <!-- 정맥 인증 -->
+    <string name="artery_main_info_text">손바닥을 흰색 프레임 안에 맞춘 후
+        \n 화면을 터치해 촬영해주세요</string>
+    <string name="artery_main_user_check_text">흰색 프레임에 배경이 나타나지 않는지 확인하십시오.</string>
+    <string name="artery_main_one_more">한번 더 촬영해주세요</string>
+    <string name="artery_main_ok">확인</string>
+    <string name="artery_main_again">다시 촬영해주세요</string>
+    <string name="artery_enroll_fail">등록 실패하였습니다. \n 처음부터 다시 촬영해주세요</string>
+    <string name="artery_verificate_fail">인증 실패하였습니다. \n 처음부터 다시 촬영해주세요</string>
+    <string name="artery_left_hand">왼손</string>
+    <string name="artery_right_hand">오른손</string>
+    <string name="artery_bad_img_quality">촬영 품질이 좋지 않습니다. \n 다른 장소에서 등록해주세요</string>
+    <string name="artery_invalid_hand">정상적이지 않은 손바닥이 감지되었습니다.</string>
+    <string name="artery_proper_position">손이 올바른 위치에 있지 않습니다.</string>
+    <string name="artery_hand_position_center">화면 중앙에 손을 올려주세요.</string>
+    <string name="artery_error">오류가 발생하였습니다.</string>
+    <string name="artery_fail">실패 하였습니다.</string>
+    <string name="artery_success">성공 하였습니다.</string>
 </resources>

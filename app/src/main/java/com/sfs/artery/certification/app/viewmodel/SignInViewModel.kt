@@ -39,6 +39,9 @@ class SignInViewModel @Inject constructor(
     // 정맥 타입
     val arteryType: MutableLiveData<ArteryType> by lazy { MutableLiveData<ArteryType>() }
 
+    // 정맥 등록 여부
+    var arteryEnroll: Boolean = false
+
     // 가입 필수값 체크
     val signEssentialChk: MutableLiveData<SignFormErrorType> by lazy { MutableLiveData<SignFormErrorType>() }
 
@@ -142,6 +145,8 @@ class SignInViewModel @Inject constructor(
             signEssentialChk.postValue(SignFormErrorType.COMPANY_CODE_EMPTY)
         } else if (isCompanyCodeConfirm.value == false) {
             signEssentialChk.postValue(SignFormErrorType.COMPANY_CODE_CHK_EMPTY)
+        } else if (!arteryEnroll) {
+            signEssentialChk.postValue(SignFormErrorType.NOTHING_ENROLL_ARTERY)
         } else {
             // 필수값이 모두 체크되었을 경우 가입 진행
             doSignIn()

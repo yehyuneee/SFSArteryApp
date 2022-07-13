@@ -16,7 +16,8 @@ enum class SignFormErrorType(@StringRes val msg: Int) {
     PHONE_NUM_EMPTY(msg = R.string.sign_in_number_empty),
     PHONE_NUM_NOT_CORRECT(msg = R.string.sign_in_number_not_correct),
     COMPANY_CODE_EMPTY(msg = R.string.sign_in_company_code_empty),
-    COMPANY_CODE_CHK_EMPTY(msg = R.string.sign_in_company_code_confirm_empty)
+    COMPANY_CODE_CHK_EMPTY(msg = R.string.sign_in_company_code_confirm_empty),
+    NOTHING_ENROLL_ARTERY(msg = R.string.sign_in_artery_enroll_nothing)
 }
 
 /**
