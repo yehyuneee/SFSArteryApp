@@ -17,7 +17,7 @@ import java.util.regex.Pattern
 import javax.inject.Inject
 
 @HiltViewModel
-class SignInViewModel @Inject constructor(
+class  SignInViewModel @Inject constructor(
     resourceProvider: ResourceProvider,
 ) : BaseViewModel() {
     var userDao: UserDao

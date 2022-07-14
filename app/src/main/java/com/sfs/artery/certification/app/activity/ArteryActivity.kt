@@ -18,7 +18,6 @@ import java.util.*
 
 class ArteryActivity : Activity(), Handler.Callback {
 
-
     companion object {
         val KEY_NRPALMACTIVITY_REQUEST_INIT =
             "com.sfs.artery.certification.app.activity.arteryactivity.requestinit.intent_key"

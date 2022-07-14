@@ -10,6 +10,8 @@ import com.sfs.artery.certification.app.extention.startActivity
 import com.sfs.artery.certification.app.viewmodel.LoginViewModel
 import dagger.hilt.android.AndroidEntryPoint
 
+// AndroidEntryPoint : Hilt가 해당 클래스에 Dependency를 제공할 수 있는 Component를 생성해준다.
+// Hilt 참고 : https://developer88.tistory.com/349
 @AndroidEntryPoint
 class LoginActivity : BaseActivity<ActivityLoginBinding, LoginViewModel>(), View.OnClickListener {
     override val layoutId: Int = R.layout.activity_login
@@ -19,11 +21,13 @@ class LoginActivity : BaseActivity<ActivityLoginBinding, LoginViewModel>(), View
         super.onCreate(savedInstanceState)
 
         viewBinding!!.loginSignInLayout.setOnClickListener(this)
+        viewBinding!!.loginBtnLayout.setOnClickListener(this)
     }
 
     override fun onClick(view: View?) {
         when (view!!.id) {
             viewBinding?.loginSignInLayout?.id -> startActivity<SignInActivity>()
+            viewBinding?.loginBtnLayout?.id -> startActivity<NormalUserInfoActivity>()
         }
     }
 }

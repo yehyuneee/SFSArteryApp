@@ -23,6 +23,9 @@
         android:supportsRtl="true"
         android:theme="@style/Theme.SFSArteryApp">
         <activity
+            android:name=".activity.NormalUserInfoActivity"
+            android:exported="true" />
+        <activity
             android:name=".activity.ArteryActivity"
             android:exported="false" />
         <activity
