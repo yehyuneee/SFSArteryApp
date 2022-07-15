@@ -17,8 +17,22 @@ class LoginActivity : BaseActivity<ActivityLoginBinding, LoginViewModel>(), View
     override val layoutId: Int = R.layout.activity_login
     override val variable: Int = BR.viewmodel
     override val viewModel: LoginViewModel by viewModels()
+
+    var mArteryUserId: Int = 0
+
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
+
+        with(viewModel) {
+            loginStatus.observe(this@LoginActivity, { status ->
+                if (status) {
+                    mArteryUserId = arteryUserId.toInt()
+                    // TODO 인증 페이지 추가
+                    // LEFT, RIGHT INDEX 공통으로 빼야할 것 같음.
+                    // 인증할때 파라미터도 공통으로 빼야하지 않을까,,,
+                }
+            })
+        }
 
         viewBinding!!.loginSignInLayout.setOnClickListener(this)
         viewBinding!!.loginBtnLayout.setOnClickListener(this)

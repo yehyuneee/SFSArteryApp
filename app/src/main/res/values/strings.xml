@@ -37,6 +37,8 @@
     <string name="sign_in_artery_enroll">정맥등록</string>
     <string name="sign_in_artery_enroll_btn">정맥등록하기</string>
     <string name="sign_in_artery_enroll_nothing">정맥 인증이 등록되지 않았습니다.</string>
+    <string name="sign_in_artery_right_enroll_nothing">오른손 정맥 인증이 등록되지 않았습니다.</string>
+    <string name="sign_in_artery_left_enroll_nothing">왼손 정맥 인증이 등록되지 않았습니다.</string>
     <string name="sign_in_artery_enroll_left_hand">왼손</string>
     <string name="sign_in_artery_enroll_right_hand">오른손</string>
     <string name="sign_in_artery_enroll_success">%s 정맥이 등록되었습니다</string>

@@ -7,6 +7,7 @@ import android.os.Handler
 import android.os.Message
 import android.view.KeyEvent
 import android.view.View
+import androidx.appcompat.app.AppCompatActivity
 import com.sfs.artery.certification.app.util.ArteryActivityResponse
 import com.sfs.artery.certification.app.view.ArteryResourceManager
 import jp.co.normee.palmvein.NRPalmView
@@ -16,7 +17,7 @@ import java.io.Serializable
 import java.util.*
 
 
-class ArteryActivity : Activity(), Handler.Callback {
+class ArteryActivity : AppCompatActivity(), Handler.Callback {
 
     companion object {
         val KEY_NRPALMACTIVITY_REQUEST_INIT =
@@ -36,7 +37,6 @@ class ArteryActivity : Activity(), Handler.Callback {
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
-
 
         val decorView = window.decorView
         val uiOptions = (View.SYSTEM_UI_FLAG_HIDE_NAVIGATION or View.SYSTEM_UI_FLAG_FULLSCREEN
@@ -78,6 +78,11 @@ class ArteryActivity : Activity(), Handler.Callback {
         URView = NRPalmView(this, this, descs, arteryResourceManager)
         setContentView(URView)
     }
+
+    fun initView() {
+
+    }
+
 
     fun deleteUserData(user_id: Int) {
         NRPalmView.deleteData(this, user_id, this, if (IsActiveAuditLog) ActivityAuditLog else null)

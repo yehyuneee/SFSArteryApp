@@ -16,11 +16,13 @@ import com.sfs.artery.certification.app.databinding.ActivitySignInBinding
 import com.sfs.artery.certification.app.extention.moveArteryActivity
 import com.sfs.artery.certification.app.util.ArteryActivityResponse
 import com.sfs.artery.certification.app.util.CommonDialogListener
+import com.sfs.artery.certification.app.util.PermissionListener
 import com.sfs.artery.certification.app.view.HeaderView
 import com.sfs.artery.certification.app.viewmodel.SignInViewModel
 import dagger.hilt.android.AndroidEntryPoint
 import jp.co.normee.palmvein.NRPalmViewDesc
 import jp.co.normee.palmvein.NRPalmViewMsg
+import kotlin.random.Random
 
 @AndroidEntryPoint
 class SignInActivity : BaseActivity<ActivitySignInBinding, SignInViewModel>(),
@@ -30,6 +32,7 @@ class SignInActivity : BaseActivity<ActivitySignInBinding, SignInViewModel>(),
     override val viewModel: SignInViewModel by viewModels()
 
     private var mUserId = ""
+    private var mArteryUserId: Int = 0
     private val mActivity = this@SignInActivity
 
     val LEFT_HAND_CODE = 0
@@ -86,7 +89,6 @@ class SignInActivity : BaseActivity<ActivitySignInBinding, SignInViewModel>(),
 
                 if (!mUserId.equals(id)) {
                     idOverlapId = false
-                    arteryEnroll = false
                     if (arteryType.value == ArteryType.RIGHT) {
                         viewBinding!!.rightHandArteryLayout.setBackgroundResource(
                             ableBackground)
@@ -143,13 +145,10 @@ class SignInActivity : BaseActivity<ActivitySignInBinding, SignInViewModel>(),
      * 정맥 등록 페이지 이동
      */
     fun moveArteryEnrollActivity(handCode: Int) {
+        mArteryUserId = Random.nextInt(1000)
+        // TODO 일단 userId 랜덤 숫자로 등록
         val requestCode = ArteryActivity.KEY_NRPALMACTIVITY_REQUEST_INIT
         val setting = NRPalmViewDesc.InitDescs()
-
-        if (viewBinding!!.signInIdEdit.text.isNullOrEmpty() && !viewModel.idOverlapId) {
-            showCommonDialog(AlertDialogBtnType.ONE, "아이디 입력 및 중복 체크해주세요.")
-            return
-        }
 
         if (handCode == LEFT_HAND_CODE) {
             viewModel.arteryType.postValue(ArteryType.LEFT)
@@ -157,12 +156,21 @@ class SignInActivity : BaseActivity<ActivitySignInBinding, SignInViewModel>(),
             viewModel.arteryType.postValue(ArteryType.RIGHT)
         }
 
-        setting.Setting.UserID = viewBinding!!.signInIdEdit.text.toString().toInt()
+        setting.Setting.UserID = mArteryUserId
         setting.Setting.SubID = handCode
         setting.Call.CMode = NRPalmViewDesc.CallDesc.CallMode.REGISTER
         setting.Setting.IsOutputAuditLog = false
 
-        moveArteryActivity<ArteryActivity>(setting, requestCode, mResult)
+        requestCameraPermission(object : PermissionListener {
+            override fun onGranted() {
+                moveArteryActivity<ArteryActivity>(setting, requestCode, mResult)
+            }
+
+            override fun onRefused() {
+                showCommonDialog(AlertDialogBtnType.ONE, "카메라 권한 미허용으로 정맥 등록이 불가능합니다.")
+            }
+        })
+
     }
 
     fun activityForResult(): ActivityResultLauncher<Intent> {
@@ -173,9 +181,10 @@ class SignInActivity : BaseActivity<ActivitySignInBinding, SignInViewModel>(),
             } else {
                 val res: ArteryActivityResponse =
                     result.data?.getSerializableExtra(KEY_NRPALMACTIVITY_RESPONS) as ArteryActivityResponse
-                when (res.Value) {
-//                    NRPalmViewMsg.MSGVALUE_CANCEL -> alertText =
-//                        getString(R.string.artery_error)
+                val value = res.Value
+                when (value) {
+                    NRPalmViewMsg.MSGVALUE_CANCEL -> alertText =
+                        getString(R.string.cancel_text)
                     NRPalmViewMsg.MSGVALUE_SUCCESS -> {
                         alertText = getString(R.string.artery_success)
                         if (res.ValueStr != null) {
@@ -189,16 +198,18 @@ class SignInActivity : BaseActivity<ActivitySignInBinding, SignInViewModel>(),
                                 viewBinding!!.rightHandArteryLayout.setBackgroundResource(
                                     unableBackground)
                                 viewBinding!!.rightHandArteryLayout.isClickable = false
+                                arteryRightHandEnroll = true
                             } else {
                                 handType = getString(R.string.artery_left_hand)
                                 viewBinding!!.leftHandArteryLayout.setBackgroundResource(
                                     unableBackground)
                                 viewBinding!!.leftHandArteryLayout.isClickable = false
+                                arteryLeftHandEnroll = true
                             }
                             viewBinding!!.arteryConfirmText.text =
                                 String.format(getString(R.string.sign_in_artery_enroll_success),
                                     handType)
-                            arteryEnroll = true
+                            arteryUserId = mArteryUserId
                         }
                     }
                     NRPalmViewMsg.MSGVALUE_FAILURE -> {
@@ -207,9 +218,11 @@ class SignInActivity : BaseActivity<ActivitySignInBinding, SignInViewModel>(),
                             alertText += res.ValueStr
                         }
                     }
-                    else -> alertText =
-                        java.lang.String.format(getString(R.string.artery_error) + "[%d]",
-                            res.Value)
+                    else -> {
+                        alertText =
+                            java.lang.String.format(getString(R.string.artery_error) + "[%d]",
+                                value)
+                    }
                 }
             }
             showCommonDialog(AlertDialogBtnType.ONE, alertText.toString())

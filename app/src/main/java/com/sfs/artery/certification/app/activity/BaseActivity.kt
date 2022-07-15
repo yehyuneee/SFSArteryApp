@@ -1,12 +1,16 @@
 package com.sfs.artery.certification.app.activity
 
+import android.Manifest
 import android.os.Bundle
+import androidx.activity.result.contract.ActivityResultContract
+import androidx.activity.result.contract.ActivityResultContracts
 import androidx.appcompat.app.AppCompatActivity
 import androidx.databinding.DataBindingUtil
 import androidx.databinding.ViewDataBinding
 import androidx.lifecycle.LifecycleObserver
 import com.sfs.artery.certification.app.common.AlertDialogBtnType
 import com.sfs.artery.certification.app.util.CommonDialogListener
+import com.sfs.artery.certification.app.util.PermissionListener
 import com.sfs.artery.certification.app.view.CommonDialog
 import com.sfs.artery.certification.app.viewmodel.BaseViewModel
 
@@ -19,6 +23,18 @@ abstract class BaseActivity<DataBiding : ViewDataBinding, model : BaseViewModel>
     abstract val layoutId: Int
     abstract val variable: Int
     abstract val viewModel: model
+
+    lateinit var _permissionListener: PermissionListener
+
+    val requestPermissionLancher = registerForActivityResult(
+        ActivityResultContracts.RequestPermission()) { isGranted ->
+        if (isGranted) {
+            // 권한 획득 성공
+            _permissionListener.onGranted()
+        } else {
+            _permissionListener.onRefused()
+        }
+    }
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
@@ -58,6 +74,10 @@ abstract class BaseActivity<DataBiding : ViewDataBinding, model : BaseViewModel>
         }
     }
 
+    fun requestCameraPermission(permissionListener: PermissionListener) {
+        _permissionListener = permissionListener
+        requestPermissionLancher.launch(Manifest.permission.CAMERA)
+    }
 
     override fun onDestroy() {
         super.onDestroy()

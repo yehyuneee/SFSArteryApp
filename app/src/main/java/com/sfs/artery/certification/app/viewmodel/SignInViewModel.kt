@@ -1,8 +1,5 @@
 package com.sfs.artery.certification.app.viewmodel
 
-import android.text.Editable
-import android.text.TextWatcher
-import android.util.Log
 import androidx.lifecycle.MutableLiveData
 import com.sfs.artery.certification.app.common.ArteryType
 import com.sfs.artery.certification.app.common.SignFormErrorType
@@ -13,6 +10,7 @@ import com.sfs.artery.certification.app.util.ResourceProvider
 import dagger.hilt.android.lifecycle.HiltViewModel
 import io.reactivex.android.schedulers.AndroidSchedulers
 import io.reactivex.schedulers.Schedulers
+import java.util.*
 import java.util.regex.Pattern
 import javax.inject.Inject
 
@@ -37,10 +35,15 @@ class  SignInViewModel @Inject constructor(
     val isCompanyCodeConfirm = MutableLiveData<Boolean>()
 
     // 정맥 타입
+    lateinit var artery: EnumMap<ArteryType, Int>
     val arteryType: MutableLiveData<ArteryType> by lazy { MutableLiveData<ArteryType>() }
 
     // 정맥 등록 여부
-    var arteryEnroll: Boolean = false
+    var arteryLeftHandEnroll: Boolean = false
+    var arteryRightHandEnroll: Boolean = false
+
+    // 정맥 User Id
+    var arteryUserId: Int = 0
 
     // 가입 필수값 체크
     val signEssentialChk: MutableLiveData<SignFormErrorType> by lazy { MutableLiveData<SignFormErrorType>() }
@@ -56,7 +59,7 @@ class  SignInViewModel @Inject constructor(
      * 가입하기
      */
     fun doSignIn() {
-        val userData = User(0, user_id.value.toString(), user_pw.value.toString(),
+        val userData = User(arteryUserId, user_id.value.toString(), user_pw.value.toString(),
             user_name.value.toString(), user_phonenum.value.toString(),
             user_company_code.value.toString(), ArteryType.LEFT.name, "0")
         addDisposable(
@@ -64,10 +67,8 @@ class  SignInViewModel @Inject constructor(
                 .observeOn(AndroidSchedulers.mainThread())
                 .subscribe({
                     signInStatus.postValue(true)
-                    Log.e("성공??", userData.userId)
                 }, {
                     signInStatus.postValue(false)
-                    Log.e("실패??", it.cause.toString())
                 })
         )
     }
@@ -100,25 +101,6 @@ class  SignInViewModel @Inject constructor(
     }
 
     /**
-     * 회원가입 Form 입력 여부 체크
-     * edittext 참고 : https://steemit.com/kr/@jeonghamin/andoird-5-mvvm-edittext
-     * 모든 edittext에 넣고, 회원가입 폼 체크하 면 될 것 같음
-     */
-    fun signInTextWatcher() = object : TextWatcher {
-        override fun beforeTextChanged(p0: CharSequence?, p1: Int, p2: Int, p3: Int) {
-            TODO("Not yet implemented")
-        }
-
-        override fun onTextChanged(p0: CharSequence?, p1: Int, p2: Int, p3: Int) {
-            signEssentialFormCheck()
-        }
-
-        override fun afterTextChanged(p0: Editable?) {
-            TODO("Not yet implemented")
-        }
-    }
-
-    /**
      * 가입하기 클릭 시
      * 필수란 체크
      */
@@ -145,8 +127,16 @@ class  SignInViewModel @Inject constructor(
             signEssentialChk.postValue(SignFormErrorType.COMPANY_CODE_EMPTY)
         } else if (isCompanyCodeConfirm.value == false) {
             signEssentialChk.postValue(SignFormErrorType.COMPANY_CODE_CHK_EMPTY)
-        } else if (!arteryEnroll) {
-            signEssentialChk.postValue(SignFormErrorType.NOTHING_ENROLL_ARTERY)
+        } else if (!arteryLeftHandEnroll || !arteryRightHandEnroll || arteryUserId == 0) {
+            if (!arteryLeftHandEnroll && !arteryRightHandEnroll) {
+                signEssentialChk.postValue(SignFormErrorType.NOTHING_ENROLL_ARTERY)
+            } else if (!arteryRightHandEnroll) {
+                signEssentialChk.postValue(SignFormErrorType.NOTHING_ENROLL_RIGHT_ARTERY)
+            } else if (!arteryLeftHandEnroll) {
+                signEssentialChk.postValue(SignFormErrorType.NOTHING_ENROLL_LEFT_ARTERY)
+            } else {
+                signEssentialChk.postValue(SignFormErrorType.NOTHING_ENROLL_ARTERY)
+            }
         } else {
             // 필수값이 모두 체크되었을 경우 가입 진행
             doSignIn()

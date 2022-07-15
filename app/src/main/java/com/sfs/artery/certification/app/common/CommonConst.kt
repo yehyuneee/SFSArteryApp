@@ -17,7 +17,9 @@ enum class SignFormErrorType(@StringRes val msg: Int) {
     PHONE_NUM_NOT_CORRECT(msg = R.string.sign_in_number_not_correct),
     COMPANY_CODE_EMPTY(msg = R.string.sign_in_company_code_empty),
     COMPANY_CODE_CHK_EMPTY(msg = R.string.sign_in_company_code_confirm_empty),
-    NOTHING_ENROLL_ARTERY(msg = R.string.sign_in_artery_enroll_nothing)
+    NOTHING_ENROLL_ARTERY(msg = R.string.sign_in_artery_enroll_nothing),
+    NOTHING_ENROLL_LEFT_ARTERY(msg = R.string.sign_in_artery_left_enroll_nothing),
+    NOTHING_ENROLL_RIGHT_ARTERY(msg = R.string.sign_in_artery_right_enroll_nothing)
 }
 
 /**
@@ -30,7 +32,7 @@ enum class AlertDialogBtnType {
 /**
  * 정맥(손) 타입
  */
-enum class ArteryType {
-    LEFT,
-    RIGHT
+enum class ArteryType(msg: Int) {
+    LEFT(msg = 0),
+    RIGHT(msg = 1)
 }
