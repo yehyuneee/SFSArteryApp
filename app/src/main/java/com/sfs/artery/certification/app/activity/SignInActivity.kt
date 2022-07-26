@@ -49,8 +49,10 @@ class SignInActivity : BaseActivity<ActivitySignInBinding, SignInViewModel>(),
             signEssentialChk.observe(this@SignInActivity, { errMsg ->
                 // 필수값 체크
                 // 에러사항들 알림팝업 노출
-                showCommonDialog(AlertDialogBtnType.ONE,
-                    this@SignInActivity.resources.getString(errMsg.msg))
+                showCommonDialog(
+                    AlertDialogBtnType.ONE,
+                    this@SignInActivity.resources.getString(errMsg.msg)
+                )
             })
 
             signInStatus.observe(this@SignInActivity, { chkAll ->
@@ -58,7 +60,8 @@ class SignInActivity : BaseActivity<ActivitySignInBinding, SignInViewModel>(),
                 if (chkAll) {
                     showCommonDialog(
                         AlertDialogBtnType.ONE,
-                        "회원가입이 완료되었습니다.")
+                        "회원가입이 완료되었습니다."
+                    )
                         .let {
                             it.dialogClick(object : CommonDialogListener {
                                 override fun onConfirm() {
@@ -91,11 +94,13 @@ class SignInActivity : BaseActivity<ActivitySignInBinding, SignInViewModel>(),
                     idOverlapId = false
                     if (arteryType.value == ArteryType.RIGHT) {
                         viewBinding!!.rightHandArteryLayout.setBackgroundResource(
-                            ableBackground)
+                            ableBackground
+                        )
                         viewBinding!!.rightHandArteryLayout.isClickable = true
                     } else {
                         viewBinding!!.rightHandArteryLayout.setBackgroundResource(
-                            ableBackground)
+                            ableBackground
+                        )
                         viewBinding!!.leftHandArteryLayout.isClickable = true
                     }
                 }
@@ -108,9 +113,11 @@ class SignInActivity : BaseActivity<ActivitySignInBinding, SignInViewModel>(),
         mResult = activityForResult()
 
         with(viewBinding!!) {
-            headerView.setHeader(HeaderView.HEADER_BACK,
+            headerView.setHeader(
+                HeaderView.HEADER_BACK,
                 applicationContext.getString(R.string.login_sign_in),
-                this@SignInActivity)
+                this@SignInActivity
+            )
 
             signInNumberEdit.addTextChangedListener(PhoneNumberFormattingTextWatcher())
             signInOverlapBtn.setOnClickListener(mActivity)
@@ -132,11 +139,11 @@ class SignInActivity : BaseActivity<ActivitySignInBinding, SignInViewModel>(),
             }
             viewBinding!!.leftHandArteryLayout.id -> {
                 // 왼쪽 정맥
-                moveArteryEnrollActivity(LEFT_HAND_CODE)
+                moveArteryEnrollActivity(ArteryType.LEFT.code)
             }
             viewBinding!!.rightHandArteryLayout.id -> {
                 // 오른쪽 정맥
-                moveArteryEnrollActivity(RIGHT_HAND_CODE)
+                moveArteryEnrollActivity(ArteryType.RIGHT.code)
             }
         }
     }
@@ -150,7 +157,7 @@ class SignInActivity : BaseActivity<ActivitySignInBinding, SignInViewModel>(),
         val requestCode = ArteryActivity.KEY_NRPALMACTIVITY_REQUEST_INIT
         val setting = NRPalmViewDesc.InitDescs()
 
-        if (handCode == LEFT_HAND_CODE) {
+        if (handCode == ArteryType.LEFT.code) {
             viewModel.arteryType.postValue(ArteryType.LEFT)
         } else {
             viewModel.arteryType.postValue(ArteryType.RIGHT)
@@ -175,7 +182,7 @@ class SignInActivity : BaseActivity<ActivitySignInBinding, SignInViewModel>(),
 
     fun activityForResult(): ActivityResultLauncher<Intent> {
         return registerForActivityResult(ActivityResultContracts.StartActivityForResult()) { result ->
-            var alertText: String? = "N/A"
+            var alertText: String? = ""
             if (result.resultCode == 0) {
                 alertText = getString(R.string.artery_error)
             } else {
@@ -186,7 +193,6 @@ class SignInActivity : BaseActivity<ActivitySignInBinding, SignInViewModel>(),
                     NRPalmViewMsg.MSGVALUE_CANCEL -> alertText =
                         getString(R.string.cancel_text)
                     NRPalmViewMsg.MSGVALUE_SUCCESS -> {
-                        alertText = getString(R.string.artery_success)
                         if (res.ValueStr != null) {
                             alertText += res.ValueStr
                         }
@@ -196,19 +202,22 @@ class SignInActivity : BaseActivity<ActivitySignInBinding, SignInViewModel>(),
                             if (arteryType.value == ArteryType.RIGHT) {
                                 handType = getString(R.string.artery_right_hand)
                                 viewBinding!!.rightHandArteryLayout.setBackgroundResource(
-                                    unableBackground)
+                                    unableBackground
+                                )
                                 viewBinding!!.rightHandArteryLayout.isClickable = false
                                 arteryRightHandEnroll = true
                             } else {
                                 handType = getString(R.string.artery_left_hand)
                                 viewBinding!!.leftHandArteryLayout.setBackgroundResource(
-                                    unableBackground)
+                                    unableBackground
+                                )
                                 viewBinding!!.leftHandArteryLayout.isClickable = false
                                 arteryLeftHandEnroll = true
                             }
-                            viewBinding!!.arteryConfirmText.text =
-                                String.format(getString(R.string.sign_in_artery_enroll_success),
-                                    handType)
+                            alertText = String.format(
+                                getString(R.string.sign_in_artery_enroll_success),
+                                handType
+                            )
                             arteryUserId = mArteryUserId
                         }
                     }
@@ -220,8 +229,10 @@ class SignInActivity : BaseActivity<ActivitySignInBinding, SignInViewModel>(),
                     }
                     else -> {
                         alertText =
-                            java.lang.String.format(getString(R.string.artery_error) + "[%d]",
-                                value)
+                            java.lang.String.format(
+                                getString(R.string.artery_error) + "[%d]",
+                                value
+                            )
                     }
                 }
             }

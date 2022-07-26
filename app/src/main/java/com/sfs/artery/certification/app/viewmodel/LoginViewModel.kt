@@ -1,6 +1,7 @@
 package com.sfs.artery.certification.app.viewmodel
 
 import androidx.lifecycle.MutableLiveData
+import com.sfs.artery.certification.app.common.LoginType
 import com.sfs.artery.certification.app.roomdb.ArteryDatabase
 import com.sfs.artery.certification.app.roomdb.dao.UserDao
 import com.sfs.artery.certification.app.util.ResourceProvider
@@ -23,6 +24,7 @@ class LoginViewModel @Inject constructor(
     val saveIdFlag: MutableLiveData<Boolean> by lazy { MutableLiveData<Boolean>() }
 
     val loginStatus: MutableLiveData<Boolean> by lazy { MutableLiveData<Boolean>() }
+    val loginFailType: MutableLiveData<LoginType> by lazy { MutableLiveData<LoginType>() }
 
     init {
         userDao = ArteryDatabase.getInstance(resourceProvider.getContext())!!.userDao()
@@ -32,26 +34,37 @@ class LoginViewModel @Inject constructor(
      * Id로 로그인 진행
      */
     fun doIdLogin() {
-        addDisposable(
-            userDao.searchId(userId.value.toString())
-                .subscribeOn(Schedulers.io())
-                .observeOn(AndroidSchedulers.mainThread())
-                .subscribe({ user ->
-                    var flag = true
-                    val loginUser = user
+        if(userId.value.isNullOrEmpty()){
+            loginFailType.postValue(LoginType.ID_EMPTY)
+        }else if(userPw.value.isNullOrEmpty()){
+            loginFailType.postValue(LoginType.PW_EMPTY)
+        }else if(companyCode.value.isNullOrEmpty()){
+            loginFailType.postValue(LoginType.COMPANY_CODE_EMPTY)
+        }else{
+            addDisposable(
+                userDao.searchId(userId.value.toString())
+                    .subscribeOn(Schedulers.io())
+                    .observeOn(AndroidSchedulers.mainThread())
+                    .subscribe({ user ->
+                        var flag = true
+                        val loginUser = user
 
-                    if (loginUser.userPw != userPw.value) {
-                        // 패스워드 체크
-                        flag = false
-                    } else if (loginUser.userCompanyCode != companyCode.value) {
-                        // 회사코드 체크
-                        flag = false
-                    }
-                    arteryUserId = loginUser.id.toString()
-                    loginStatus.postValue(flag)
-                }, {
-                    loginStatus.postValue(false)
-                })
-        )
+                        if (loginUser.userPw != userPw.value) {
+                            // 패스워드 체크
+                            loginFailType.postValue(LoginType.PW_COMFIRM_CHK_EMPTY)
+                            flag = false
+                        } else if (loginUser.userCompanyCode != companyCode.value) {
+                            // 회사코드 체크
+                            loginFailType.postValue(LoginType.COMPANY_CODE_CHK_EMPTY)
+                            flag = false
+                        }
+                        arteryUserId = loginUser.id.toString()
+                        loginStatus.postValue(flag)
+                    }, {
+                        loginFailType.postValue(LoginType.ID_COMFIRM_CHK_EMPTY)
+                        loginStatus.postValue(false)
+                    })
+            )
+        }
     }
 }

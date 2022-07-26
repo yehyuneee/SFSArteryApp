@@ -16,6 +16,7 @@
     <!-- 회원가입 -->
     <string name="sign_in_id">아이디</string>
     <string name="sign_in_id_empty">아이디를 입력해주세요</string>
+    <string name="sign_in_id_comfirm">아이디를 확인해주세요</string>
     <string name="sign_in_overlap_chk">중복확인</string>
     <string name="sign_in_overlap_chk_empty">아이디 중복확인이 필요합니다</string>
     <string name="sign_in_overlap_comfirm">중복 확인되었습니다</string>
@@ -34,7 +35,7 @@
     <string name="sign_in_company_code_confirm">회사코드 확인</string>
     <string name="sign_in_company_code_confirm_empty">회사코드를 확인해주세요</string>
     <string name="sign_in_company_code_confirm_fail">회사코드가 존재하지 않습니다.</string>
-    <string name="sign_in_artery_enroll">정맥등록</string>
+    <string name="sign_in_artery_enroll">정맥등록 (회원가입 후 마이페이지에서 수정 가능합니다.)</string>
     <string name="sign_in_artery_enroll_btn">정맥등록하기</string>
     <string name="sign_in_artery_enroll_nothing">정맥 인증이 등록되지 않았습니다.</string>
     <string name="sign_in_artery_right_enroll_nothing">오른손 정맥 인증이 등록되지 않았습니다.</string>
@@ -50,7 +51,7 @@
     <string name="artery_main_user_check_text">흰색 프레임에 배경이 나타나지 않는지 확인하십시오.</string>
     <string name="artery_main_one_more">한번 더 촬영해주세요</string>
     <string name="artery_main_ok">확인</string>
-    <string name="artery_main_again">다시 촬영해주세요</string>
+    <string name="artery_main_again">재촬영</string>
     <string name="artery_enroll_fail">등록 실패하였습니다. \n 처음부터 다시 촬영해주세요</string>
     <string name="artery_verificate_fail">인증 실패하였습니다. \n 처음부터 다시 촬영해주세요</string>
     <string name="artery_left_hand">왼손</string>
@@ -72,4 +73,7 @@
     <string name="normal_user_info_artery_pawssord_change">비밀번호 변경</string>
     <string name="normal_user_info_artery_id_title">%s님</string>
     <string name="normal_user_info_artery_id_sub">안녕하세요.</string>
+
+    <!-- 인증 -->
+    <string name="artery_success_text_authenticate">정맥 인증되었습니다.</string>
 </resources>

@@ -8,9 +8,14 @@ import android.os.Message
 import android.view.KeyEvent
 import android.view.View
 import androidx.appcompat.app.AppCompatActivity
+import com.sfs.artery.certification.app.R
+import com.sfs.artery.certification.app.common.AlertDialogBtnType
 import com.sfs.artery.certification.app.util.ArteryActivityResponse
+import com.sfs.artery.certification.app.util.CommonDialogListener
 import com.sfs.artery.certification.app.view.ArteryResourceManager
+import com.sfs.artery.certification.app.view.CommonDialog
 import jp.co.normee.palmvein.NRPalmView
+import jp.co.normee.palmvein.NRPalmViewDesc
 import jp.co.normee.palmvein.NRPalmViewDesc.InitDescs
 import jp.co.normee.palmvein.NRPalmViewMsg
 import java.io.Serializable
@@ -34,6 +39,7 @@ class ArteryActivity : AppCompatActivity(), Handler.Callback {
     private var UserID = 0
     private var SubID = 0
     private var IsActiveAuditLog = false
+    private var mRequestType = NRPalmViewDesc.CallDesc.CallMode.REGISTER
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
@@ -71,6 +77,7 @@ class ArteryActivity : AppCompatActivity(), Handler.Callback {
         UserID = descs?.Setting?.UserID ?: 0
         SubID = descs?.Setting?.SubID ?: 0
         IsActiveAuditLog = descs?.Setting?.IsOutputAuditLog ?: false
+        mRequestType = descs?.Call?.CMode!!
 
         var arteryResourceManager: ArteryResourceManager? = null
         arteryResourceManager = ArteryResourceManager(this)
@@ -78,11 +85,6 @@ class ArteryActivity : AppCompatActivity(), Handler.Callback {
         URView = NRPalmView(this, this, descs, arteryResourceManager)
         setContentView(URView)
     }
-
-    fun initView() {
-
-    }
-
 
     fun deleteUserData(user_id: Int) {
         NRPalmView.deleteData(this, user_id, this, if (IsActiveAuditLog) ActivityAuditLog else null)

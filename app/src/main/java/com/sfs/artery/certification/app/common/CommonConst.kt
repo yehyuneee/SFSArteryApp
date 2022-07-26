@@ -1,5 +1,6 @@
 package com.sfs.artery.certification.app.common
 
+import androidx.annotation.IntegerRes
 import androidx.annotation.StringRes
 import com.sfs.artery.certification.app.R
 
@@ -22,6 +23,16 @@ enum class SignFormErrorType(@StringRes val msg: Int) {
     NOTHING_ENROLL_RIGHT_ARTERY(msg = R.string.sign_in_artery_right_enroll_nothing)
 }
 
+enum class LoginType(@StringRes val msg: Int) {
+    ID_EMPTY(msg = R.string.sign_in_id_empty),
+    ID_COMFIRM_CHK_EMPTY(msg = R.string.sign_in_id_comfirm),
+    PW_EMPTY(msg = R.string.sign_in_pw_empty),
+    PW_COMFIRM_CHK_EMPTY(msg = R.string.sign_in_pw_confirm_empty),
+    COMPANY_CODE_EMPTY(msg = R.string.sign_in_company_code_empty),
+    COMPANY_CODE_CHK_EMPTY(msg = R.string.sign_in_company_code_confirm_empty),
+}
+
+
 /**
  * Alert 버튼 타입
  */
@@ -32,7 +43,7 @@ enum class AlertDialogBtnType {
 /**
  * 정맥(손) 타입
  */
-enum class ArteryType(msg: Int) {
-    LEFT(msg = 0),
-    RIGHT(msg = 1)
+enum class ArteryType(@IntegerRes val code: Int) {
+    LEFT(code = 0),
+    RIGHT(code = 1)
 }
