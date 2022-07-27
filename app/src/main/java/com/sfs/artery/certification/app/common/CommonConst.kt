@@ -32,6 +32,11 @@ enum class LoginType(@StringRes val msg: Int) {
     COMPANY_CODE_CHK_EMPTY(msg = R.string.sign_in_company_code_confirm_empty),
 }
 
+enum class LoginProcessType() {
+    NONE,
+    ARTERY_LOGIN,
+    ID_LOGIN
+}
 
 /**
  * Alert 버튼 타입

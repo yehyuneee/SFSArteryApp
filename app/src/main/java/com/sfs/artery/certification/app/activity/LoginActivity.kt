@@ -10,8 +10,11 @@ import com.sfs.artery.certification.app.BR
 import com.sfs.artery.certification.app.R
 import com.sfs.artery.certification.app.common.AlertDialogBtnType
 import com.sfs.artery.certification.app.common.ArteryType
+import com.sfs.artery.certification.app.common.LoginProcessType
 import com.sfs.artery.certification.app.databinding.ActivityLoginBinding
+import com.sfs.artery.certification.app.extention.moveActivity
 import com.sfs.artery.certification.app.extention.moveArteryActivity
+import com.sfs.artery.certification.app.extention.moveNomalUserInfoActivity
 import com.sfs.artery.certification.app.extention.startActivity
 import com.sfs.artery.certification.app.util.ArteryActivityResponse
 import com.sfs.artery.certification.app.util.CommonDialogListener
@@ -20,7 +23,6 @@ import com.sfs.artery.certification.app.viewmodel.LoginViewModel
 import dagger.hilt.android.AndroidEntryPoint
 import jp.co.normee.palmvein.NRPalmViewDesc
 import jp.co.normee.palmvein.NRPalmViewMsg
-import kotlin.random.Random
 
 // AndroidEntryPoint : Hilt가 해당 클래스에 Dependency를 제공할 수 있는 Component를 생성해준다.
 // Hilt 참고 : https://developer88.tistory.com/349
@@ -40,12 +42,11 @@ class LoginActivity : BaseActivity<ActivityLoginBinding, LoginViewModel>(), View
 
         with(viewModel) {
             loginStatus.observe(this@LoginActivity, { status ->
-                if (status) {
+                if (status == LoginProcessType.ARTERY_LOGIN) {
                     mArteryUserId = arteryUserId.toInt()
-                    // TODO 인증 페이지 추가
-                    // LEFT, RIGHT INDEX 공통으로 빼야할 것 같음.
-                    // 인증할때 파라미터도 공통으로 빼야하지 않을까,,,
                     moveArteryEnrollActivity()
+                } else if (status == LoginProcessType.ID_LOGIN) {
+                    moveNomalUserInfoActivity<NormalUserInfoActivity>(viewModel.userId.value.toString())
                 }
             })
 
@@ -107,7 +108,7 @@ class LoginActivity : BaseActivity<ActivityLoginBinding, LoginViewModel>(), View
                                 override fun onConfirm() {
                                     dismiss()
                                     finish()
-                                    startActivity<NormalUserInfoActivity>()
+                                    moveNomalUserInfoActivity<NormalUserInfoActivity>(viewModel.userId.value.toString())
                                 }
 
                                 override fun onCancle() {

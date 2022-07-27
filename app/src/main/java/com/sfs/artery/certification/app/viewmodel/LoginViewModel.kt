@@ -1,6 +1,7 @@
 package com.sfs.artery.certification.app.viewmodel
 
 import androidx.lifecycle.MutableLiveData
+import com.sfs.artery.certification.app.common.LoginProcessType
 import com.sfs.artery.certification.app.common.LoginType
 import com.sfs.artery.certification.app.roomdb.ArteryDatabase
 import com.sfs.artery.certification.app.roomdb.dao.UserDao
@@ -20,10 +21,9 @@ class LoginViewModel @Inject constructor(
 
     val userId: MutableLiveData<String> by lazy { MutableLiveData<String>() }
     val userPw: MutableLiveData<String> by lazy { MutableLiveData<String>() }
-    val companyCode: MutableLiveData<String> by lazy { MutableLiveData<String>() }
     val saveIdFlag: MutableLiveData<Boolean> by lazy { MutableLiveData<Boolean>() }
 
-    val loginStatus: MutableLiveData<Boolean> by lazy { MutableLiveData<Boolean>() }
+    val loginStatus: MutableLiveData<LoginProcessType> by lazy { MutableLiveData<LoginProcessType>() }
     val loginFailType: MutableLiveData<LoginType> by lazy { MutableLiveData<LoginType>() }
 
     init {
@@ -31,40 +31,53 @@ class LoginViewModel @Inject constructor(
     }
 
     /**
+     * 정맥 인증 로그인 진행
+     */
+    fun doArteryLogin() {
+        if (userId.value.isNullOrEmpty()) {
+            loginFailType.postValue(LoginType.ID_EMPTY)
+        } else {
+            doLogin(false)
+        }
+    }
+
+    /**
      * Id로 로그인 진행
      */
     fun doIdLogin() {
-        if(userId.value.isNullOrEmpty()){
+        if (userId.value.isNullOrEmpty()) {
             loginFailType.postValue(LoginType.ID_EMPTY)
-        }else if(userPw.value.isNullOrEmpty()){
+        } else if (userPw.value.isNullOrEmpty()) {
             loginFailType.postValue(LoginType.PW_EMPTY)
-        }else if(companyCode.value.isNullOrEmpty()){
-            loginFailType.postValue(LoginType.COMPANY_CODE_EMPTY)
-        }else{
-            addDisposable(
-                userDao.searchId(userId.value.toString())
-                    .subscribeOn(Schedulers.io())
-                    .observeOn(AndroidSchedulers.mainThread())
-                    .subscribe({ user ->
-                        var flag = true
-                        val loginUser = user
+        } else {
+            doLogin(true)
+        }
+    }
 
+
+    fun doLogin(isIdLogin: Boolean) {
+        addDisposable(
+            userDao.searchId(userId.value.toString())
+                .subscribeOn(Schedulers.io())
+                .observeOn(AndroidSchedulers.mainThread())
+                .subscribe({ user ->
+                    val loginUser = user
+
+                    if (isIdLogin) {
+                        // id로 로그인
                         if (loginUser.userPw != userPw.value) {
                             // 패스워드 체크
                             loginFailType.postValue(LoginType.PW_COMFIRM_CHK_EMPTY)
-                            flag = false
-                        } else if (loginUser.userCompanyCode != companyCode.value) {
-                            // 회사코드 체크
-                            loginFailType.postValue(LoginType.COMPANY_CODE_CHK_EMPTY)
-                            flag = false
                         }
+                        loginStatus.postValue(LoginProcessType.ID_LOGIN)
+                    } else {
                         arteryUserId = loginUser.id.toString()
-                        loginStatus.postValue(flag)
-                    }, {
-                        loginFailType.postValue(LoginType.ID_COMFIRM_CHK_EMPTY)
-                        loginStatus.postValue(false)
-                    })
-            )
-        }
+                        loginStatus.postValue(LoginProcessType.ARTERY_LOGIN)
+                    }
+                }, {
+                    loginFailType.postValue(LoginType.ID_COMFIRM_CHK_EMPTY)
+                    loginStatus.postValue(LoginProcessType.NONE)
+                })
+        )
     }
 }

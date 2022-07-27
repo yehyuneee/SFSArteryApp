@@ -3,6 +3,7 @@ package com.sfs.artery.certification.app.extention
 import android.app.Activity
 import android.content.Intent
 import androidx.activity.result.ActivityResultLauncher
+import com.sfs.artery.certification.app.activity.NormalUserInfoActivity.Companion.USER_INFO_ID
 import jp.co.normee.palmvein.NRPalmViewDesc
 
 /**
@@ -33,4 +34,14 @@ inline fun <reified T : Activity> Activity.moveArteryActivity(
     val intent = Intent(this, T::class.java)
     intent.putExtra(requestKey, setting)
     result.launch(intent)
+}
+
+/**
+ * Activity 이동
+ */
+inline fun <reified T : Activity> Activity.moveNomalUserInfoActivity(id: String) {
+    val intent = Intent(this, T::class.java)
+    intent.putExtra(USER_INFO_ID, id)
+    startActivity(intent)
+    finish()
 }

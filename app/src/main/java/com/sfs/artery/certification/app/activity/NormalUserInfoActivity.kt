@@ -1,6 +1,5 @@
 package com.sfs.artery.certification.app.activity
 
-import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
 import androidx.activity.viewModels
 import com.sfs.artery.certification.app.BR
@@ -18,8 +17,28 @@ class NormalUserInfoActivity :
     override val variable: Int = BR.viewmodel
     override val viewModel: NormalUserInfoViewModel by viewModels()
 
+    companion object {
+        val USER_INFO_ID = "USER_INFO_ID"
+    }
+
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
+
+        with(viewModel) {
+            setUserInfo(intent.extras?.get(USER_INFO_ID).toString())
+
+            userInfo.observe(this@NormalUserInfoActivity, { user ->
+                viewBinding!!.apply {
+                    infoUserIdText.text = String.format(
+                        getString(R.string.normal_user_info_artery_id_title),
+                        user.userId)
+
+                    userInfoCompanyName.text = user.userCompanyCode
+                    userInfoName.text = user.userName
+                    userInfoPhonenum.text = user.userPhoneNum
+                }
+            })
+        }
 
         viewBinding!!.headerView.setHeader(
             HeaderView.HEADER_BACK,

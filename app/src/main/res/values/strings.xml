@@ -12,6 +12,8 @@
     <string name="login_btn">로그인</string>
     <string name="login_sign_in">회원가입</string>
     <string name="login_company_code_hint">회사코드 입력</string>
+    <string name="login_welcome">환영합니다</string>
+    <string name="login_artery">정맥 인증으로 로그인</string>
 
     <!-- 회원가입 -->
     <string name="sign_in_id">아이디</string>

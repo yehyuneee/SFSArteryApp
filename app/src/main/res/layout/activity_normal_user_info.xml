@@ -38,7 +38,6 @@
                 android:id="@+id/info_user_id_text"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:text="@string/normal_user_info_artery_id_title"
                 android:textColor="@color/main_bg_color"
                 android:textSize="@dimen/text_size_20"
                 android:textStyle="bold" />
@@ -61,10 +60,10 @@
                 android:textStyle="bold" />
 
             <androidx.appcompat.widget.AppCompatTextView
+                android:id="@+id/user_info_company_name"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_marginTop="@dimen/dp_size_10"
-                android:text="아이시프트"
                 android:textColor="@color/black"
                 android:textSize="@dimen/text_size_13" />
 
@@ -78,10 +77,10 @@
                 android:textStyle="bold" />
 
             <androidx.appcompat.widget.AppCompatTextView
+                android:id="@+id/user_info_name"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_marginTop="@dimen/dp_size_10"
-                android:text="김예"
                 android:textColor="@color/black"
                 android:textSize="@dimen/text_size_13" />
 
@@ -95,10 +94,10 @@
                 android:textStyle="bold" />
 
             <androidx.appcompat.widget.AppCompatTextView
+                android:id="@+id/user_info_phonenum"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_marginTop="@dimen/dp_size_10"
-                android:text="010-7559-3071"
                 android:textColor="@color/black"
                 android:textSize="@dimen/text_size_13" />
 
