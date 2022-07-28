@@ -3,6 +3,7 @@
     <string name="app_name">SFSArteryApp</string>
     <string name="confirm_text">확인</string>
     <string name="cancel_text">취소</string>
+    <string name="camera_permission_denied">카메라 권한 미허용으로 정맥 인증이 불가능합니다.</string>
 
     <!-- 로그인 -->
     <string name="main_app_name">SFS</string>
@@ -46,6 +47,9 @@
     <string name="sign_in_artery_enroll_right_hand">오른손</string>
     <string name="sign_in_artery_enroll_success">%s 정맥이 등록되었습니다</string>
     <string name="sign_in_btn">가입하기</string>
+    <string name="sign_in_fail">회원가입에 실패하였습니다.</string>
+    <string name="sign_in_overlap_id">중복된 아이디입니다.</string>
+    <string name="sign_in_usable_id">사용가능한 아이디입니다.</string>
 
     <!-- 정맥 인증 -->
     <string name="artery_main_info_text">손바닥을 흰색 프레임 안에 맞춘 후

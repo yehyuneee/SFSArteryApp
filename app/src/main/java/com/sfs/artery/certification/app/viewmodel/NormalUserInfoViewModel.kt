@@ -24,6 +24,9 @@ class NormalUserInfoViewModel
         userDao = ArteryDatabase.getInstance(resourceProvider.getContext())!!.userDao()
     }
 
+    /**
+     * 일반 회원정보
+     */
     fun setUserInfo(id: String) {
         addDisposable(
             userDao.searchId(id)

@@ -93,7 +93,8 @@ class LoginActivity : BaseActivity<ActivityLoginBinding, LoginViewModel>(), View
             }
 
             override fun onRefused() {
-                showCommonDialog(AlertDialogBtnType.ONE, "카메라 권한 미허용으로 정맥 인증이 불가능합니다.")
+                showCommonDialog(AlertDialogBtnType.ONE,
+                    getString(R.string.camera_permission_denied))
             }
         })
 

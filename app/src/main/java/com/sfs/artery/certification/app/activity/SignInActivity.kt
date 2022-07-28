@@ -35,9 +35,6 @@ class SignInActivity : BaseActivity<ActivitySignInBinding, SignInViewModel>(),
     private var mArteryUserId: Int = 0
     private val mActivity = this@SignInActivity
 
-    val LEFT_HAND_CODE = 0
-    val RIGHT_HAND_CODE = 1
-
     private lateinit var mResult: ActivityResultLauncher<Intent>
 
     override fun onCreate(savedInstanceState: Bundle?) {
@@ -74,16 +71,16 @@ class SignInActivity : BaseActivity<ActivitySignInBinding, SignInViewModel>(),
                             })
                         }
                 } else {
-                    showCommonDialog(AlertDialogBtnType.ONE, "회원가입에 실패하였습니다.")
+                    showCommonDialog(AlertDialogBtnType.ONE, getString(R.string.sign_in_fail))
                 }
             })
 
             idValiableChk.observe(this@SignInActivity, { isOverlap ->
                 // 중복여부 체크
                 if (!isOverlap) {
-                    showCommonDialog(AlertDialogBtnType.ONE, "중복된 아이디입니다.")
+                    showCommonDialog(AlertDialogBtnType.ONE, getString(R.string.sign_in_overlap_id))
                 } else {
-                    showCommonDialog(AlertDialogBtnType.ONE, "사용가능한 아이디입니다.")
+                    showCommonDialog(AlertDialogBtnType.ONE, getString(R.string.sign_in_usable_id))
                 }
             })
 
@@ -134,7 +131,7 @@ class SignInActivity : BaseActivity<ActivitySignInBinding, SignInViewModel>(),
                 if (id?.isEmpty() == false) {
                     viewModel.isEffectiveId()
                 } else {
-                    showCommonDialog(AlertDialogBtnType.ONE, "아이디를 입력해주세요.")
+                    showCommonDialog(AlertDialogBtnType.ONE, getString(R.string.sign_in_id_empty))
                 }
             }
             viewBinding!!.leftHandArteryLayout.id -> {
@@ -174,7 +171,8 @@ class SignInActivity : BaseActivity<ActivitySignInBinding, SignInViewModel>(),
             }
 
             override fun onRefused() {
-                showCommonDialog(AlertDialogBtnType.ONE, "카메라 권한 미허용으로 정맥 등록이 불가능합니다.")
+                showCommonDialog(AlertDialogBtnType.ONE,
+                    getString(R.string.camera_permission_denied))
             }
         })
 

@@ -1,6 +1,5 @@
 package com.sfs.artery.certification.app.activity
 
-import android.app.Activity
 import android.content.Intent
 import android.os.Bundle
 import android.os.Handler
@@ -8,12 +7,8 @@ import android.os.Message
 import android.view.KeyEvent
 import android.view.View
 import androidx.appcompat.app.AppCompatActivity
-import com.sfs.artery.certification.app.R
-import com.sfs.artery.certification.app.common.AlertDialogBtnType
 import com.sfs.artery.certification.app.util.ArteryActivityResponse
-import com.sfs.artery.certification.app.util.CommonDialogListener
 import com.sfs.artery.certification.app.view.ArteryResourceManager
-import com.sfs.artery.certification.app.view.CommonDialog
 import jp.co.normee.palmvein.NRPalmView
 import jp.co.normee.palmvein.NRPalmViewDesc
 import jp.co.normee.palmvein.NRPalmViewDesc.InitDescs
