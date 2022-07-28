@@ -13,5 +13,6 @@ data class User(
     @ColumnInfo(name = "userPhone") val userPhoneNum: String,
     @ColumnInfo(name = "userCompany_code") val userCompanyCode: String,
     @ColumnInfo(name = "userArtery_hand_code") val userArteryHandCode: String,
-    @ColumnInfo(name = "userArtery_code") val userArteryCode: String,
+    @ColumnInfo(name = "userLeftArtery_code") val userLeftArteryCode: String,
+    @ColumnInfo(name = "userRightArtery_code") val userRightArteryCode: String,
 )

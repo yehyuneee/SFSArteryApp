@@ -1,11 +1,13 @@
 package com.sfs.artery.certification.app.viewmodel
 
 import androidx.lifecycle.MutableLiveData
+import com.sfs.artery.certification.app.common.CommonDefine
 import com.sfs.artery.certification.app.common.LoginProcessType
 import com.sfs.artery.certification.app.common.LoginType
 import com.sfs.artery.certification.app.roomdb.ArteryDatabase
 import com.sfs.artery.certification.app.roomdb.dao.UserDao
 import com.sfs.artery.certification.app.util.ResourceProvider
+import com.sfs.artery.certification.app.util.SharedPrefereces
 import dagger.hilt.android.lifecycle.HiltViewModel
 import io.reactivex.android.schedulers.AndroidSchedulers
 import io.reactivex.schedulers.Schedulers
@@ -14,20 +16,32 @@ import javax.inject.Inject
 @HiltViewModel
 class LoginViewModel @Inject constructor(
     resourceProvider: ResourceProvider,
+    sharedPrefereces: SharedPrefereces,
 ) : BaseViewModel() {
 
     var userDao: UserDao
+    var _sharedPrefereces = sharedPrefereces
     var arteryUserId: String = ""
 
     val userId: MutableLiveData<String> by lazy { MutableLiveData<String>() }
     val userPw: MutableLiveData<String> by lazy { MutableLiveData<String>() }
-    val saveIdFlag: MutableLiveData<Boolean> by lazy { MutableLiveData<Boolean>() }
+
+    val saveIdFlag = MutableLiveData(false)
+    val rightHandFlag = MutableLiveData(false)
+    val leftHandFlag = MutableLiveData(false)
 
     val loginStatus: MutableLiveData<LoginProcessType> by lazy { MutableLiveData<LoginProcessType>() }
     val loginFailType: MutableLiveData<LoginType> by lazy { MutableLiveData<LoginType>() }
 
     init {
         userDao = ArteryDatabase.getInstance(resourceProvider.getContext())!!.userDao()
+
+        if (_sharedPrefereces.getBoolean(CommonDefine.SAVE_ID_FLAG, false)) {
+            saveIdFlag.value = true
+            if (_sharedPrefereces.getString(CommonDefine.LOGIN_ID, "").isNotEmpty()) {
+                userId.value = _sharedPrefereces.getString(CommonDefine.LOGIN_ID, "")
+            }
+        }
     }
 
     /**
@@ -36,6 +50,8 @@ class LoginViewModel @Inject constructor(
     fun doArteryLogin() {
         if (userId.value.isNullOrEmpty()) {
             loginFailType.postValue(LoginType.ID_EMPTY)
+        } else if (leftHandFlag.value == false && rightHandFlag.value == false) {
+            loginFailType.postValue(LoginType.SELECT_ARTERY_HAND)
         } else {
             doLogin(false)
         }
@@ -71,7 +87,11 @@ class LoginViewModel @Inject constructor(
                         }
                         loginStatus.postValue(LoginProcessType.ID_LOGIN)
                     } else {
-                        arteryUserId = loginUser.id.toString()
+                        if (leftHandFlag.value == true) {
+                            arteryUserId = loginUser.userLeftArteryCode
+                        } else {
+                            arteryUserId = loginUser.userRightArteryCode
+                        }
                         loginStatus.postValue(LoginProcessType.ARTERY_LOGIN)
                     }
                 }, {
@@ -79,5 +99,13 @@ class LoginViewModel @Inject constructor(
                     loginStatus.postValue(LoginProcessType.NONE)
                 })
         )
+
+        if (saveIdFlag.value == true) {
+            _sharedPrefereces.setBoolean(CommonDefine.SAVE_ID_FLAG, true)
+            _sharedPrefereces.setString(CommonDefine.LOGIN_ID, userId.value.toString())
+        }else{
+            _sharedPrefereces.setBoolean(CommonDefine.SAVE_ID_FLAG, false)
+            _sharedPrefereces.setString(CommonDefine.LOGIN_ID, "")
+        }
     }
 }

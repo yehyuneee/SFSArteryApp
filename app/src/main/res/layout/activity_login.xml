@@ -141,7 +141,7 @@
                 android:id="@+id/login_btn_layout"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:layout_marginTop="@dimen/dp_size_30"
+                android:layout_marginTop="@dimen/dp_size_10"
                 android:background="@drawable/btn_box_layout"
                 android:onClick="@{()->viewmodel.doIdLogin()}"
                 android:orientation="horizontal"
@@ -162,6 +162,45 @@
             </androidx.appcompat.widget.LinearLayoutCompat>
 
             <androidx.appcompat.widget.LinearLayoutCompat
+                android:id="@+id/login_artery_hand_layout"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="@dimen/dp_size_20"
+                android:orientation="horizontal"
+                app:layout_constraintLeft_toLeftOf="parent"
+                app:layout_constraintTop_toBottomOf="@+id/login_btn_layout">
+
+                <com.google.android.material.checkbox.MaterialCheckBox
+                    android:id="@+id/artery_hand_left_chekbox"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:checked="@={viewmodel.leftHandFlag}"
+                    android:padding="@dimen/dp_size_0" />
+
+                <androidx.appcompat.widget.AppCompatTextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text="@string/sign_in_artery_enroll_left_hand"
+                    android:textColor="@color/black"
+                    android:textSize="@dimen/text_size_14" />
+
+                <com.google.android.material.checkbox.MaterialCheckBox
+                    android:id="@+id/artery_hand_right_chekbox"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:checked="@={viewmodel.rightHandFlag}"
+                    android:padding="@dimen/dp_size_0" />
+
+                <androidx.appcompat.widget.AppCompatTextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text="@string/artery_right_hand"
+                    android:textColor="@color/black"
+                    android:textSize="@dimen/text_size_14" />
+
+            </androidx.appcompat.widget.LinearLayoutCompat>
+
+            <androidx.appcompat.widget.LinearLayoutCompat
                 android:id="@+id/login_artery_layout"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
@@ -172,7 +211,7 @@
                 android:paddingLeft="@dimen/dp_size_10"
                 android:paddingTop="@dimen/dp_size_15"
                 android:paddingBottom="@dimen/dp_size_15"
-                app:layout_constraintTop_toBottomOf="@+id/login_btn_layout">
+                app:layout_constraintTop_toBottomOf="@+id/login_artery_hand_layout">
 
                 <com.google.android.material.textview.MaterialTextView
                     android:id="@+id/login_artery_text"

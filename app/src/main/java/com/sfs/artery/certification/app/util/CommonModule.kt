@@ -10,4 +10,7 @@ import dagger.hilt.components.SingletonComponent
 abstract class CommonModule {
     @Binds
     abstract fun resourceProvide(resourceProviderImpl: ResourceProviderImpl): ResourceProvider
+
+    @Binds
+    abstract fun sharedPreferenceProvide(sharedPrefereces: SharedPrefereces): SharePreferenceInterface
 }

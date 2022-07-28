@@ -30,6 +30,7 @@ enum class LoginType(@StringRes val msg: Int) {
     PW_COMFIRM_CHK_EMPTY(msg = R.string.sign_in_pw_confirm_empty),
     COMPANY_CODE_EMPTY(msg = R.string.sign_in_company_code_empty),
     COMPANY_CODE_CHK_EMPTY(msg = R.string.sign_in_company_code_confirm_empty),
+    SELECT_ARTERY_HAND(msg = R.string.artery_select_hand),
 }
 
 enum class LoginProcessType() {

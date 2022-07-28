@@ -12,7 +12,6 @@ import com.sfs.artery.certification.app.common.AlertDialogBtnType
 import com.sfs.artery.certification.app.common.ArteryType
 import com.sfs.artery.certification.app.common.LoginProcessType
 import com.sfs.artery.certification.app.databinding.ActivityLoginBinding
-import com.sfs.artery.certification.app.extention.moveActivity
 import com.sfs.artery.certification.app.extention.moveArteryActivity
 import com.sfs.artery.certification.app.extention.moveNomalUserInfoActivity
 import com.sfs.artery.certification.app.extention.startActivity
@@ -34,6 +33,7 @@ class LoginActivity : BaseActivity<ActivityLoginBinding, LoginViewModel>(), View
 
     private lateinit var mResult: ActivityResultLauncher<Intent>
     var mArteryUserId: Int = 0
+    var mArteryHandCode: Int = ArteryType.LEFT.code
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
@@ -56,6 +56,20 @@ class LoginActivity : BaseActivity<ActivityLoginBinding, LoginViewModel>(), View
                     this@LoginActivity.resources.getString(type.msg)
                 )
             })
+
+            rightHandFlag.observe(this@LoginActivity, { checked ->
+                if (checked) {
+                    mArteryHandCode = ArteryType.RIGHT.code
+                    viewBinding!!.arteryHandLeftChekbox.isChecked = false
+                }
+            })
+
+            leftHandFlag.observe(this@LoginActivity, { checked ->
+                if (checked) {
+                    mArteryHandCode = ArteryType.LEFT.code
+                    viewBinding!!.arteryHandRightChekbox.isChecked = false
+                }
+            })
         }
 
         viewBinding!!.loginSignInLayout.setOnClickListener(this)
@@ -69,7 +83,7 @@ class LoginActivity : BaseActivity<ActivityLoginBinding, LoginViewModel>(), View
         val setting = NRPalmViewDesc.InitDescs()
 
         setting.Setting.UserID = mArteryUserId
-        setting.Setting.SubID = ArteryType.LEFT.code
+        setting.Setting.SubID = mArteryHandCode
         setting.Call.CMode = NRPalmViewDesc.CallDesc.CallMode.AUTHENTICATE
         setting.Setting.IsOutputAuditLog = false
 

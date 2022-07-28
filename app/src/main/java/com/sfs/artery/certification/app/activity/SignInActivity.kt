@@ -205,6 +205,7 @@ class SignInActivity : BaseActivity<ActivitySignInBinding, SignInViewModel>(),
                                     unableBackground
                                 )
                                 viewBinding!!.rightHandArteryLayout.isClickable = false
+                                arteryRightUserId = mArteryUserId
                                 arteryRightHandEnroll = true
                             } else {
                                 handType = getString(R.string.artery_left_hand)
@@ -212,6 +213,7 @@ class SignInActivity : BaseActivity<ActivitySignInBinding, SignInViewModel>(),
                                     unableBackground
                                 )
                                 viewBinding!!.leftHandArteryLayout.isClickable = false
+                                arteryLeftUserId = mArteryUserId
                                 arteryLeftHandEnroll = true
                             }
                             alertText = String.format(

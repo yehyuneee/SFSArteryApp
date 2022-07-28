@@ -15,7 +15,7 @@ import java.util.regex.Pattern
 import javax.inject.Inject
 
 @HiltViewModel
-class  SignInViewModel @Inject constructor(
+class SignInViewModel @Inject constructor(
     resourceProvider: ResourceProvider,
 ) : BaseViewModel() {
     var userDao: UserDao
@@ -44,6 +44,8 @@ class  SignInViewModel @Inject constructor(
 
     // 정맥 User Id
     var arteryUserId: Int = 0
+    var arteryLeftUserId: Int = 0
+    var arteryRightUserId: Int = 0
 
     // 가입 필수값 체크
     val signEssentialChk: MutableLiveData<SignFormErrorType> by lazy { MutableLiveData<SignFormErrorType>() }
@@ -61,7 +63,7 @@ class  SignInViewModel @Inject constructor(
     fun doSignIn() {
         val userData = User(arteryUserId, user_id.value.toString(), user_pw.value.toString(),
             user_name.value.toString(), user_phonenum.value.toString(),
-            user_company_code.value.toString(), ArteryType.LEFT.name, "0")
+            user_company_code.value.toString(), ArteryType.LEFT.name, arteryLeftUserId.toString(), arteryRightUserId.toString())
         addDisposable(
             userDao.insertUser(userData).subscribeOn(Schedulers.io())
                 .observeOn(AndroidSchedulers.mainThread())
@@ -127,7 +129,7 @@ class  SignInViewModel @Inject constructor(
             signEssentialChk.postValue(SignFormErrorType.COMPANY_CODE_EMPTY)
         } else if (isCompanyCodeConfirm.value == false) {
             signEssentialChk.postValue(SignFormErrorType.COMPANY_CODE_CHK_EMPTY)
-        } else if (!arteryLeftHandEnroll || !arteryRightHandEnroll || arteryUserId == 0) {
+        } else if (!arteryLeftHandEnroll || !arteryRightHandEnroll || arteryLeftUserId == 0 || arteryRightUserId == 0) {
             if (!arteryLeftHandEnroll && !arteryRightHandEnroll) {
                 signEssentialChk.postValue(SignFormErrorType.NOTHING_ENROLL_ARTERY)
             } else if (!arteryRightHandEnroll) {

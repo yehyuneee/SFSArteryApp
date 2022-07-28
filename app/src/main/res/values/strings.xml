@@ -65,6 +65,7 @@
     <string name="artery_error">오류가 발생하였습니다.</string>
     <string name="artery_fail">실패 하였습니다.</string>
     <string name="artery_success">성공 하였습니다.</string>
+    <string name="artery_select_hand">정맥 인증할 손을 선택해주세요.</string>
 
     <!-- 개인 회원정보 -->
     <string name="normal_user_info_text">회원정보</string>

@@ -41,7 +41,7 @@ class NormalUserInfoActivity :
         }
 
         viewBinding!!.headerView.setHeader(
-            HeaderView.HEADER_BACK,
+            HeaderView.HEADER_BASIC,
             applicationContext.getString(R.string.normal_user_info_text),
             this@NormalUserInfoActivity
         )
