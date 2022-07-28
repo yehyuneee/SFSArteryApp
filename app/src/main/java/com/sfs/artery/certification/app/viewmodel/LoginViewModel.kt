@@ -84,8 +84,9 @@ class LoginViewModel @Inject constructor(
                         if (loginUser.userPw != userPw.value) {
                             // 패스워드 체크
                             loginFailType.postValue(LoginType.PW_COMFIRM_CHK_EMPTY)
+                        }else{
+                            loginStatus.postValue(LoginProcessType.ID_LOGIN)
                         }
-                        loginStatus.postValue(LoginProcessType.ID_LOGIN)
                     } else {
                         if (leftHandFlag.value == true) {
                             arteryUserId = loginUser.userLeftArteryCode
