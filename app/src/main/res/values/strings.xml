@@ -79,4 +79,9 @@
 
     <!-- 인증 -->
     <string name="artery_success_text_authenticate">정맥 인증되었습니다.</string>
+
+    <!-- 비밀번호 변경-->
+    <string name="change_pw_origin">기존 비밀번호 입력</string>
+    <string name="change_pw_new">새로운 비밀번호 입력</string>
+    <string name="change_pw_new_confirm">새로운 비밀번호 확인</string>
 </resources>
