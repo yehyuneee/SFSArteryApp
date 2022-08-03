@@ -14,7 +14,8 @@
     <string name="login_sign_in">회원가입</string>
     <string name="login_company_code_hint">회사코드 입력</string>
     <string name="login_welcome">환영합니다</string>
-    <string name="login_artery">정맥 인증으로 로그인</string>
+    <string name="login_artery">손 정맥 로그인</string>
+    <string name="right_hand_login">오른손 로그인</string>
 
     <!-- 회원가입 -->
     <string name="sign_in_id">아이디</string>
@@ -86,6 +87,12 @@
 
     <!-- 비밀번호 변경-->
     <string name="change_pw_origin">기존 비밀번호 입력</string>
+    <string name="change_pw_origin_empty">기존 비밀번호를 입력해주세요.</string>
+    <string name="change_pw_origin_confirm">기존 비밀번호를 확인해주세요.</string>
     <string name="change_pw_new">새로운 비밀번호 입력</string>
+    <string name="change_pw_new_empty">새로운 비밀번호를 입력해주세요.</string>
     <string name="change_pw_new_confirm">새로운 비밀번호 확인</string>
+    <string name="change_pw_new_confirm_empty">새로운 비밀번호를 확인해주세요.</string>
+    <string name="change_pw_success">비밀번호가 변경되었습니다.</string>
+    <string name="change_pw_fail">비밀번호 변경에 실패하였습니다.</string>
 </resources>

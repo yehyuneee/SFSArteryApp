@@ -1,121 +1,144 @@
 <?xml version="1.0" encoding="utf-8"?>
-<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
-    android:layout_width="match_parent"
-    android:layout_height="wrap_content"
-    android:orientation="vertical"
-    android:paddingLeft="@dimen/dp_size_20"
-    android:paddingTop="@dimen/dp_size_30"
-    android:paddingRight="@dimen/dp_size_20">
+<layout>
 
-    <androidx.appcompat.widget.AppCompatTextView
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:text="@string/change_pw_origin"
-        android:textColor="@color/black" />
+    <data>
 
-    <androidx.appcompat.widget.LinearLayoutCompat
-        android:layout_width="match_parent"
-        android:layout_height="match_parent"
-        android:layout_marginTop="@dimen/dp_size_10"
-        android:background="@drawable/sign_edit_box_layout">
+        <variable
+            name="viewmodel"
+            type="com.sfs.artery.certification.app.viewmodel.ChangePwViewModel" />
+    </data>
 
-        <androidx.appcompat.widget.AppCompatEditText
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:background="@null"
-            android:hint="@string/change_pw_origin"
-            android:inputType="textPassword"
-            android:paddingLeft="@dimen/dp_size_10"
-            android:paddingTop="@dimen/dp_size_10"
-            android:paddingBottom="@dimen/dp_size_10"
-            android:privateImeOptions="defaultInputmode=english"
-            android:textColorHint="@color/basic_hint_text_color2"
-            android:textSize="@dimen/text_size_14" />
-    </androidx.appcompat.widget.LinearLayoutCompat>
-
-    <androidx.appcompat.widget.AppCompatTextView
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_marginTop="@dimen/dp_size_20"
-        android:text="@string/change_pw_new"
-        android:textColor="@color/black" />
-
-    <androidx.appcompat.widget.LinearLayoutCompat
-        android:layout_width="match_parent"
-        android:layout_height="match_parent"
-        android:layout_marginTop="@dimen/dp_size_10"
-        android:background="@drawable/sign_edit_box_layout">
-
-        <androidx.appcompat.widget.AppCompatEditText
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:background="@null"
-            android:hint="@string/change_pw_new"
-            android:inputType="textPassword"
-            android:paddingLeft="@dimen/dp_size_10"
-            android:paddingTop="@dimen/dp_size_10"
-            android:paddingBottom="@dimen/dp_size_10"
-            android:privateImeOptions="defaultInputmode=english"
-            android:textColorHint="@color/basic_hint_text_color2"
-            android:textSize="@dimen/text_size_14" />
-    </androidx.appcompat.widget.LinearLayoutCompat>
-
-    <androidx.appcompat.widget.AppCompatTextView
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_marginTop="@dimen/dp_size_20"
-        android:text="@string/change_pw_new_confirm"
-        android:textColor="@color/black" />
-
-    <androidx.appcompat.widget.LinearLayoutCompat
-        android:layout_width="match_parent"
-        android:layout_height="match_parent"
-        android:layout_marginTop="@dimen/dp_size_10"
-        android:background="@drawable/sign_edit_box_layout">
-
-        <androidx.appcompat.widget.AppCompatEditText
-            android:id="@+id/sign_in_id_edit"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:background="@null"
-            android:hint="@string/change_pw_new_confirm"
-            android:inputType="textPassword"
-            android:paddingLeft="@dimen/dp_size_10"
-            android:paddingTop="@dimen/dp_size_10"
-            android:paddingBottom="@dimen/dp_size_10"
-            android:privateImeOptions="defaultInputmode=english"
-            android:textColorHint="@color/basic_hint_text_color2"
-            android:textSize="@dimen/text_size_14" />
-    </androidx.appcompat.widget.LinearLayoutCompat>
-
-    <androidx.appcompat.widget.LinearLayoutCompat
+    <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:layout_marginTop="@dimen/dp_size_30"
-        android:layout_marginBottom="@dimen/dp_size_30"
-        android:orientation="horizontal">
+        android:orientation="vertical"
+        android:paddingLeft="@dimen/dp_size_20"
+        android:paddingTop="@dimen/dp_size_30"
+        android:paddingRight="@dimen/dp_size_20">
 
         <androidx.appcompat.widget.AppCompatTextView
-            android:layout_width="@dimen/dp_size_0"
+            android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:layout_weight="1"
-            android:background="@drawable/btn_box_layout"
-            android:paddingTop="@dimen/dp_size_10"
-            android:paddingBottom="@dimen/dp_size_10"
-            android:text="@string/confirm_text"
-            android:textAlignment="center"
-            android:textColor="@color/white" />
+            android:text="@string/change_pw_origin"
+            android:textColor="@color/black" />
+
+        <androidx.appcompat.widget.LinearLayoutCompat
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:layout_marginTop="@dimen/dp_size_10"
+            android:background="@drawable/sign_edit_box_layout">
+
+            <androidx.appcompat.widget.AppCompatEditText
+                android:id="@+id/change_pw_origin"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:background="@null"
+                android:hint="@string/change_pw_origin"
+                android:inputType="textPassword"
+                android:paddingLeft="@dimen/dp_size_10"
+                android:paddingTop="@dimen/dp_size_10"
+                android:paddingBottom="@dimen/dp_size_10"
+                android:privateImeOptions="defaultInputmode=english"
+                android:text="@={viewmodel.originPw}"
+                android:textColor="@color/black"
+                android:textColorHint="@color/basic_hint_text_color2"
+                android:textSize="@dimen/text_size_14" />
+        </androidx.appcompat.widget.LinearLayoutCompat>
 
         <androidx.appcompat.widget.AppCompatTextView
-            android:layout_width="@dimen/dp_size_0"
+            android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:layout_marginLeft="@dimen/dp_size_10"
-            android:layout_weight="1"
-            android:background="@drawable/btn_box_layout"
-            android:paddingTop="@dimen/dp_size_10"
-            android:paddingBottom="@dimen/dp_size_10"
-            android:text="@string/cancel_text"
-            android:textAlignment="center"
-            android:textColor="@color/white" />
-    </androidx.appcompat.widget.LinearLayoutCompat>
-</LinearLayout>
+            android:layout_marginTop="@dimen/dp_size_20"
+            android:text="@string/change_pw_new"
+            android:textColor="@color/black" />
+
+        <androidx.appcompat.widget.LinearLayoutCompat
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:layout_marginTop="@dimen/dp_size_10"
+            android:background="@drawable/sign_edit_box_layout">
+
+            <androidx.appcompat.widget.AppCompatEditText
+                android:id="@+id/change_pw_new"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:background="@null"
+                android:hint="@string/change_pw_new"
+                android:inputType="textPassword"
+                android:paddingLeft="@dimen/dp_size_10"
+                android:paddingTop="@dimen/dp_size_10"
+                android:paddingBottom="@dimen/dp_size_10"
+                android:privateImeOptions="defaultInputmode=english"
+                android:text="@={viewmodel.newPw}"
+                android:textColor="@color/black"
+                android:textColorHint="@color/basic_hint_text_color2"
+                android:textSize="@dimen/text_size_14" />
+        </androidx.appcompat.widget.LinearLayoutCompat>
+
+        <androidx.appcompat.widget.AppCompatTextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="@dimen/dp_size_20"
+            android:text="@string/change_pw_new_confirm"
+            android:textColor="@color/black" />
+
+        <androidx.appcompat.widget.LinearLayoutCompat
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:layout_marginTop="@dimen/dp_size_10"
+            android:background="@drawable/sign_edit_box_layout">
+
+            <androidx.appcompat.widget.AppCompatEditText
+                android:id="@+id/sign_in_id_edit"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:background="@null"
+                android:hint="@string/change_pw_new_confirm"
+                android:inputType="textPassword"
+                android:paddingLeft="@dimen/dp_size_10"
+                android:paddingTop="@dimen/dp_size_10"
+                android:paddingBottom="@dimen/dp_size_10"
+                android:privateImeOptions="defaultInputmode=english"
+                android:text="@={viewmodel.newPwConfirm}"
+                android:textColor="@color/black"
+                android:textColorHint="@color/basic_hint_text_color2"
+                android:textSize="@dimen/text_size_14" />
+        </androidx.appcompat.widget.LinearLayoutCompat>
+
+        <androidx.appcompat.widget.LinearLayoutCompat
+            android:id="@+id/test"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="@dimen/dp_size_30"
+            android:layout_marginBottom="@dimen/dp_size_30"
+            android:orientation="horizontal">
+
+            <androidx.appcompat.widget.AppCompatTextView
+                android:id="@+id/change_pw_confirm"
+                android:layout_width="@dimen/dp_size_0"
+                android:layout_height="wrap_content"
+                android:layout_weight="1"
+                android:background="@drawable/btn_box_layout"
+                android:onClick="@{()->viewmodel.doChangePw()}"
+                android:paddingTop="@dimen/dp_size_10"
+                android:paddingBottom="@dimen/dp_size_10"
+                android:text="@string/confirm_text"
+                android:textAlignment="center"
+                android:textColor="@color/white" />
+
+            <androidx.appcompat.widget.AppCompatTextView
+                android:id="@+id/change_pw_cancel"
+                android:layout_width="@dimen/dp_size_0"
+                android:layout_height="wrap_content"
+                android:layout_marginLeft="@dimen/dp_size_10"
+                android:layout_weight="1"
+                android:background="@drawable/btn_box_layout"
+                android:paddingTop="@dimen/dp_size_10"
+                android:paddingBottom="@dimen/dp_size_10"
+                android:text="@string/cancel_text"
+                android:textAlignment="center"
+                android:textColor="@color/white" />
+        </androidx.appcompat.widget.LinearLayoutCompat>
+    </LinearLayout>
+</layout>
+

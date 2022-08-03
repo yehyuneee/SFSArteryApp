@@ -1,4 +1,4 @@
-package com.sfs.artery.certification.app.view
+package com.sfs.artery.certification.app.dialog
 
 import android.content.Context
 import android.graphics.Color

@@ -1,10 +1,7 @@
 package com.sfs.artery.certification.app.roomdb.dao
 
 import androidx.lifecycle.LiveData
-import androidx.room.Dao
-import androidx.room.Insert
-import androidx.room.OnConflictStrategy
-import androidx.room.Query
+import androidx.room.*
 import com.sfs.artery.certification.app.roomdb.entity.User
 import io.reactivex.Completable
 import io.reactivex.Single
@@ -19,4 +16,7 @@ interface UserDao {
 
     @Query("SELECT userInfo.* FROM userinfo JOIN userSearch ON (userSearch.userPw == userInfo.userPw) WHERE userSearch MATCH :pw")
     fun searchPw(pw: String): Single<User>
+
+    @Query("UPDATE userInfo SET userPw =:changePw WHERE userPw =:originPw")
+    fun updatePw(originPw: String, changePw: String): Single<Unit>
 }

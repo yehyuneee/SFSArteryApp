@@ -33,6 +33,16 @@ enum class LoginType(@StringRes val msg: Int) {
     SELECT_ARTERY_HAND(msg = R.string.artery_select_hand),
 }
 
+enum class ChangePwErrorType(@StringRes val msg: Int) {
+    ORIGIN_PW_EMPTY(msg = R.string.change_pw_origin_empty),
+    NEW_PW_EMPTY(msg = R.string.change_pw_new_empty),
+    NEW_PW_COFIRM_EMPTY(msg = R.string.change_pw_new_confirm_empty),
+    NEW_PW_COFIRM(msg = R.string.change_pw_origin_confirm),
+    NEW_PW_COFIRM_NOT_CORRECT(msg = R.string.sign_in_pw_confirm_empty),
+    CHANGE_PW_ERROR(msg = R.string.change_pw_fail),
+    CHANGE_PW(msg = R.string.change_pw_success),
+}
+
 enum class LoginProcessType() {
     NONE,
     ARTERY_LOGIN,

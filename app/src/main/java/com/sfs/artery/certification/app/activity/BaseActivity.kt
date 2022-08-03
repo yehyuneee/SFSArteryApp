@@ -2,7 +2,6 @@ package com.sfs.artery.certification.app.activity
 
 import android.Manifest
 import android.os.Bundle
-import androidx.activity.result.contract.ActivityResultContract
 import androidx.activity.result.contract.ActivityResultContracts
 import androidx.appcompat.app.AppCompatActivity
 import androidx.databinding.DataBindingUtil
@@ -11,7 +10,7 @@ import androidx.lifecycle.LifecycleObserver
 import com.sfs.artery.certification.app.common.AlertDialogBtnType
 import com.sfs.artery.certification.app.util.CommonDialogListener
 import com.sfs.artery.certification.app.util.PermissionListener
-import com.sfs.artery.certification.app.view.CommonDialog
+import com.sfs.artery.certification.app.dialog.CommonDialog
 import com.sfs.artery.certification.app.viewmodel.BaseViewModel
 
 abstract class BaseActivity<DataBiding : ViewDataBinding, model : BaseViewModel>

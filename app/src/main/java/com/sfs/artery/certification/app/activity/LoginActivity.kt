@@ -2,6 +2,7 @@ package com.sfs.artery.certification.app.activity
 
 import android.content.Intent
 import android.os.Bundle
+import android.util.Log
 import android.view.View
 import androidx.activity.result.ActivityResultLauncher
 import androidx.activity.result.contract.ActivityResultContracts
@@ -60,14 +61,6 @@ class LoginActivity : BaseActivity<ActivityLoginBinding, LoginViewModel>(), View
             rightHandFlag.observe(this@LoginActivity, { checked ->
                 if (checked) {
                     mArteryHandCode = ArteryType.RIGHT.code
-                    viewBinding!!.arteryHandLeftChekbox.isChecked = false
-                }
-            })
-
-            leftHandFlag.observe(this@LoginActivity, { checked ->
-                if (checked) {
-                    mArteryHandCode = ArteryType.LEFT.code
-                    viewBinding!!.arteryHandRightChekbox.isChecked = false
                 }
             })
         }
@@ -81,7 +74,7 @@ class LoginActivity : BaseActivity<ActivityLoginBinding, LoginViewModel>(), View
     fun moveArteryEnrollActivity() {
         val requestCode = ArteryActivity.KEY_NRPALMACTIVITY_REQUEST_INIT
         val setting = NRPalmViewDesc.InitDescs()
-
+        Log.d("등록 1: ", mArteryUserId.toString())
         setting.Setting.UserID = mArteryUserId
         setting.Setting.SubID = mArteryHandCode
         setting.Call.CMode = NRPalmViewDesc.CallDesc.CallMode.AUTHENTICATE
@@ -123,7 +116,7 @@ class LoginActivity : BaseActivity<ActivityLoginBinding, LoginViewModel>(), View
                                 override fun onConfirm() {
                                     dismiss()
                                     finish()
-                                    moveNomalUserInfoActivity<NormalUserInfoActivity>(viewModel.userId.value.toString())
+                                    moveNomalUserInfoActivity<NormalUserInfoActivity>(viewModel.userId.value.toString(), )
                                 }
 
                                 override fun onCancle() {

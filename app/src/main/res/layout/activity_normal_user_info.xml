@@ -109,6 +109,7 @@
                 android:orientation="horizontal">
 
                 <androidx.appcompat.widget.LinearLayoutCompat
+                    android:id="@+id/change_artery_code"
                     android:layout_width="@dimen/dp_size_0"
                     android:layout_height="wrap_content"
                     android:layout_weight="1"
@@ -134,7 +135,8 @@
                     android:layout_marginLeft="@dimen/dp_size_10"
                     android:layout_weight="1"
                     android:background="@drawable/btn_box_layout"
-                    android:gravity="center">
+                    android:gravity="center"
+                    android:onClick="@{()->viewmodel.changePw()}">
 
                     <androidx.appcompat.widget.AppCompatTextView
                         android:layout_width="wrap_content"

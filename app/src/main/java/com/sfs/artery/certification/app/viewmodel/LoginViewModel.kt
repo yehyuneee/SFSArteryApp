@@ -28,7 +28,6 @@ class LoginViewModel @Inject constructor(
 
     val saveIdFlag = MutableLiveData(false)
     val rightHandFlag = MutableLiveData(false)
-    val leftHandFlag = MutableLiveData(false)
 
     val loginStatus: MutableLiveData<LoginProcessType> by lazy { MutableLiveData<LoginProcessType>() }
     val loginFailType: MutableLiveData<LoginType> by lazy { MutableLiveData<LoginType>() }
@@ -50,8 +49,6 @@ class LoginViewModel @Inject constructor(
     fun doArteryLogin() {
         if (userId.value.isNullOrEmpty()) {
             loginFailType.postValue(LoginType.ID_EMPTY)
-        } else if (leftHandFlag.value == false && rightHandFlag.value == false) {
-            loginFailType.postValue(LoginType.SELECT_ARTERY_HAND)
         } else {
             doLogin(false)
         }
@@ -88,10 +85,10 @@ class LoginViewModel @Inject constructor(
                             loginStatus.postValue(LoginProcessType.ID_LOGIN)
                         }
                     } else {
-                        if (leftHandFlag.value == true) {
-                            arteryUserId = loginUser.userLeftArteryCode
-                        } else {
+                        if (rightHandFlag.value == true) {
                             arteryUserId = loginUser.userRightArteryCode
+                        } else {
+                            arteryUserId = loginUser.userLeftArteryCode
                         }
                         loginStatus.postValue(LoginProcessType.ARTERY_LOGIN)
                     }
