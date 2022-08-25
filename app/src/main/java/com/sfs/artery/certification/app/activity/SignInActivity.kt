@@ -168,7 +168,7 @@ class SignInActivity : BaseActivity<ActivitySignInBinding, SignInViewModel>(),
 
         requestCameraPermission(object : PermissionListener {
             override fun onGranted() {
-                moveArteryActivity<ArteryActivity>(setting, requestCode, mResult)
+                moveArteryActivity<ArteryActivityTest>(setting, requestCode, mResult)
             }
 
             override fun onRefused() {
