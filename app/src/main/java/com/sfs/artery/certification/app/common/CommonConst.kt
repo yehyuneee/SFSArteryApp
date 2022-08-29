@@ -63,3 +63,8 @@ enum class ArteryType(@IntegerRes val code: Int) {
     LEFT(code = 0),
     RIGHT(code = 1)
 }
+
+enum class LoadingType{
+    SHOW,
+    DISMISS
+}

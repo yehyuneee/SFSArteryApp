@@ -14,9 +14,9 @@ buildscript {
         activity_ktx_version = '1.4.0'
 
         room_version = '2.4.2'
+        glide_version = '4.13.2'
     }
     repositories {
-
         google()
         mavenCentral()
     }

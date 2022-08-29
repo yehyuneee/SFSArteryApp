@@ -31,9 +31,10 @@ class ChangePwViewModel @Inject constructor(
         } else {
             addDisposable(
                 userDao.searchPw(originPw.value.toString())
+                    .startLoading()
                     .subscribeOn(Schedulers.io())
                     .observeOn(AndroidSchedulers.mainThread())
-                    .subscribe({ user ->
+                    .doComplete({ user ->
                         if (originPw.value == user.userPw) {
                             updatePw()
                         } else {
@@ -51,9 +52,10 @@ class ChangePwViewModel @Inject constructor(
     fun updatePw() {
         addDisposable(
             userDao.updatePw(originPw.value.toString(), newPw.value.toString())
+                .startLoading()
                 .subscribeOn(Schedulers.io())
                 .observeOn(AndroidSchedulers.mainThread())
-                .subscribe({ user ->
+                .doComplete({ user ->
                     changePwState.postValue(ChangePwErrorType.CHANGE_PW)
                 }, {
                     changePwState.postValue(ChangePwErrorType.CHANGE_PW_ERROR)

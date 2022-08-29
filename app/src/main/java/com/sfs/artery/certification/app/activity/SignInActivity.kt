@@ -45,6 +45,8 @@ class SignInActivity : BaseActivity<ActivitySignInBinding, SignInViewModel>(),
 
         with(viewModel) {
             signEssentialChk.observe(this@SignInActivity, { errMsg ->
+                dismissDialog()
+
                 // 필수값 체크
                 // 에러사항들 알림팝업 노출
                 showCommonDialog(

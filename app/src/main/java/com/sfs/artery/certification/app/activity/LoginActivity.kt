@@ -52,6 +52,8 @@ class LoginActivity : BaseActivity<ActivityLoginBinding, LoginViewModel>(), View
             })
 
             loginFailType.observe(this@LoginActivity, { type ->
+                dismissDialog()
+
                 showCommonDialog(
                     AlertDialogBtnType.ONE,
                     this@LoginActivity.resources.getString(type.msg)

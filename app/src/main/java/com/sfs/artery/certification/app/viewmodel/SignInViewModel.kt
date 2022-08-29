@@ -61,9 +61,15 @@ class SignInViewModel @Inject constructor(
      * 가입하기
      */
     fun doSignIn() {
-        val userData = User(arteryUserId, user_id.value.toString(), user_pw.value.toString(),
-            user_name.value.toString(), user_phonenum.value.toString(),
-            user_company_code.value.toString(), ArteryType.LEFT.name, arteryLeftUserId.toString(), arteryRightUserId.toString())
+        val userData = User(arteryUserId,
+            user_id.value.toString(),
+            user_pw.value.toString(),
+            user_name.value.toString(),
+            user_phonenum.value.toString(),
+            user_company_code.value.toString(),
+            ArteryType.LEFT.name,
+            arteryLeftUserId.toString(),
+            arteryRightUserId.toString())
         addDisposable(
             userDao.insertUser(userData).subscribeOn(Schedulers.io())
                 .observeOn(AndroidSchedulers.mainThread())
@@ -84,9 +90,10 @@ class SignInViewModel @Inject constructor(
         // TODO 차후 서버에서 체크하도록 수정 필요
         addDisposable(
             userDao.searchId(user_id.value.toString())
+                .startLoading()
                 .subscribeOn(Schedulers.io())
                 .observeOn(AndroidSchedulers.mainThread())
-                .subscribe({ user ->
+                .doComplete({ user ->
                     if (user.userId.equals(user_id.value.toString())) {
                         // 중복된 아이디가 존재한다.
                         // 아이디 재입력 필요

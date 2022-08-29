@@ -33,9 +33,10 @@ class NormalUserInfoViewModel
     fun setUserInfo(id: String) {
         addDisposable(
             userDao.searchId(id)
+                .startLoading()
                 .subscribeOn(Schedulers.io())
                 .observeOn(AndroidSchedulers.mainThread())
-                .subscribe({ user ->
+                .doComplete({ user ->
                     userInfo.value = user
                     userLeftArteryId = user.userLeftArteryCode
                     userRightArteryId = user.userRightArteryCode

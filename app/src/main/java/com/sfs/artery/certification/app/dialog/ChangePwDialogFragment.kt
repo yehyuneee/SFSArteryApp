@@ -42,6 +42,8 @@ class ChangePwDialogFragment(activity: Activity, userDao: UserDao) : DialogFragm
         changePwViewModel.userDao = mUserDao
         with(changePwViewModel) {
             changePwState.observe(this@ChangePwDialogFragment, { type ->
+                dismissDialog()
+
                 val commondialog = CommonDialog(
                     context = mActivity
                 )

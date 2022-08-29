@@ -8,9 +8,11 @@ import androidx.databinding.DataBindingUtil
 import androidx.databinding.ViewDataBinding
 import androidx.lifecycle.LifecycleObserver
 import com.sfs.artery.certification.app.common.AlertDialogBtnType
+import com.sfs.artery.certification.app.common.LoadingType
 import com.sfs.artery.certification.app.util.CommonDialogListener
 import com.sfs.artery.certification.app.util.PermissionListener
 import com.sfs.artery.certification.app.dialog.CommonDialog
+import com.sfs.artery.certification.app.dialog.LoadingDialog
 import com.sfs.artery.certification.app.viewmodel.BaseViewModel
 
 abstract class BaseActivity<DataBiding : ViewDataBinding, model : BaseViewModel>
@@ -24,6 +26,7 @@ abstract class BaseActivity<DataBiding : ViewDataBinding, model : BaseViewModel>
     abstract val viewModel: model
 
     lateinit var _permissionListener: PermissionListener
+    var mLoadingDialog: LoadingDialog? = null
 
     val requestPermissionLancher = registerForActivityResult(
         ActivityResultContracts.RequestPermission()) { isGranted ->
@@ -42,6 +45,36 @@ abstract class BaseActivity<DataBiding : ViewDataBinding, model : BaseViewModel>
             setVariable(variable, viewModel)
             _binding = this
         }
+
+        with(viewModel) {
+            loadingDialogState.observe(this@BaseActivity, { type ->
+                if (type == LoadingType.SHOW) {
+                    showLoadingDialog()
+                } else {
+                    dismissLoadingDialog()
+                }
+            })
+        }
+    }
+
+    protected fun showLoadingDialog() {
+        mLoadingDialog?.let { dialog ->
+            if (dialog.isShowing) {
+                dialog.dismissDialog()
+            }
+        }
+        mLoadingDialog = LoadingDialog(context = this)
+        mLoadingDialog?.showDialog()
+    }
+
+    protected fun dismissLoadingDialog() {
+        mLoadingDialog?.let { dialog ->
+            if (dialog.isShowing) {
+                dialog.dismissDialog()
+            }
+        }
+        mLoadingDialog?.dismissDialog()
+        mLoadingDialog = null
     }
 
     /**

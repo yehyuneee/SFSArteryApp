@@ -71,9 +71,10 @@ class LoginViewModel @Inject constructor(
     fun doLogin(isIdLogin: Boolean) {
         addDisposable(
             userDao.searchId(userId.value.toString())
+                .startLoading()
                 .subscribeOn(Schedulers.io())
                 .observeOn(AndroidSchedulers.mainThread())
-                .subscribe({ user ->
+                .doComplete({ user ->
                     val loginUser = user
 
                     if (isIdLogin) {
@@ -81,7 +82,7 @@ class LoginViewModel @Inject constructor(
                         if (loginUser.userPw != userPw.value) {
                             // 패스워드 체크
                             loginFailType.postValue(LoginType.PW_COMFIRM_CHK_EMPTY)
-                        }else{
+                        } else {
                             loginStatus.postValue(LoginProcessType.ID_LOGIN)
                         }
                     } else {
@@ -101,7 +102,7 @@ class LoginViewModel @Inject constructor(
         if (saveIdFlag.value == true) {
             _sharedPrefereces.setBoolean(CommonDefine.SAVE_ID_FLAG, true)
             _sharedPrefereces.setString(CommonDefine.LOGIN_ID, userId.value.toString())
-        }else{
+        } else {
             _sharedPrefereces.setBoolean(CommonDefine.SAVE_ID_FLAG, false)
             _sharedPrefereces.setString(CommonDefine.LOGIN_ID, "")
         }

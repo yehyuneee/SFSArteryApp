@@ -69,6 +69,8 @@ class NormalUserInfoActivity :
             })
 
             changePwState.observe(this@NormalUserInfoActivity, {
+                dismissDialog()
+
                 val changePwDialogFragment =
                     ChangePwDialogFragment(this@NormalUserInfoActivity, mUserDao)
                 changePwDialogFragment.show(supportFragmentManager, changePwDialogFragment.tag)
@@ -112,7 +114,6 @@ class NormalUserInfoActivity :
         val requestCode = ArteryActivity.KEY_NRPALMACTIVITY_REQUEST_INIT
         val setting = NRPalmViewDesc.InitDescs()
 
-        Log.d("등록 2: ", mArteryUserId)
         setting.Setting.UserID = mArteryUserId.toInt()
         setting.Setting.SubID = handCode
         setting.Call.CMode = NRPalmViewDesc.CallDesc.CallMode.REGISTER
