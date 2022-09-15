@@ -1,30 +1,28 @@
 package com.sfs.artery.certification.app.activity
 
 import android.content.Intent
+import android.graphics.Point
 import android.os.Bundle
 import android.os.Handler
 import android.os.Message
 import android.view.KeyEvent
 import android.view.View
+import android.widget.FrameLayout
 import androidx.appcompat.app.AppCompatActivity
+import androidx.appcompat.widget.AppCompatImageView
+import com.sfs.artery.certification.app.R
+import com.sfs.artery.certification.app.common.ArteryType
 import com.sfs.artery.certification.app.util.ArteryActivityResponse
 import com.sfs.artery.certification.app.view.ArteryResourceManager
 import jp.co.normee.palmvein.NRPalmView
 import jp.co.normee.palmvein.NRPalmViewDesc
 import jp.co.normee.palmvein.NRPalmViewDesc.InitDescs
 import jp.co.normee.palmvein.NRPalmViewMsg
-import jp.co.normee.palmveinui.exui.IAnimeBase
 import java.io.Serializable
 import java.util.*
-import jp.co.normee.palmveinui.IResource
-import jp.co.normee.palmveinui.IResource.ResID
-import jp.co.normee.palmveinui.exui.IAnimGenerator
-
-import jp.co.normee.palmveinui.exui.IResourceManager
-import android.R.id
 
 
-class ArteryActivity : AppCompatActivity(), Handler.Callback{
+class ArteryActivity : AppCompatActivity(), Handler.Callback {
     companion object {
         val KEY_NRPALMACTIVITY_REQUEST_INIT =
             "com.sfs.artery.certification.app.activity.arteryactivity.requestinit.intent_key"
@@ -34,7 +32,8 @@ class ArteryActivity : AppCompatActivity(), Handler.Callback{
             "com.sfs.artery.certification.app.activity.arteryactivity.respons.intent_key"
     }
 
-
+    lateinit var mView: FrameLayout
+    lateinit var mHandImage: AppCompatImageView
     private var URView: NRPalmView? = null
     private val ActivityAuditLog = ArrayList<String>()
     private var UserID = 0
@@ -49,6 +48,8 @@ class ArteryActivity : AppCompatActivity(), Handler.Callback{
         val uiOptions = (View.SYSTEM_UI_FLAG_HIDE_NAVIGATION or View.SYSTEM_UI_FLAG_FULLSCREEN
                 or View.SYSTEM_UI_FLAG_IMMERSIVE_STICKY)
         decorView.systemUiVisibility = uiOptions
+
+        setContentView(R.layout.activity_artery_test)
 
         var descs: InitDescs? = null
 
@@ -80,11 +81,38 @@ class ArteryActivity : AppCompatActivity(), Handler.Callback{
         IsActiveAuditLog = descs?.Setting?.IsOutputAuditLog ?: false
         mRequestType = descs?.Call?.CMode!!
 
-        var arteryResourceManager: ArteryResourceManager? = null
-        arteryResourceManager = ArteryResourceManager(this)
+        mView = findViewById(R.id.normee_view)
+        mHandImage = findViewById(R.id.hand_image)
 
-        URView = NRPalmView(this, this, descs, arteryResourceManager)
-        setContentView(URView)
+        val display = windowManager.defaultDisplay // in case of Activity
+        val size = Point()
+        display.getRealSize(size)
+        var height = pxToDp(size.y)
+        var width = pxToDp(size.x)
+
+        var arteryResourceManager: ArteryResourceManager? = null
+        arteryResourceManager = ArteryResourceManager(this@ArteryActivity)
+
+        URView = NRPalmView(this@ArteryActivity,
+            this@ArteryActivity,
+            descs,
+            arteryResourceManager)
+
+        if (SubID.equals(ArteryType.LEFT.code)) {
+            mHandImage.setImageDrawable(resources.getDrawable(R.drawable.left_hand,
+                application.theme))
+        } else {
+            mHandImage.setImageDrawable(resources.getDrawable(R.drawable.right_hand,
+                application.theme))
+        }
+
+
+        mView.addView(URView)
+        mHandImage.bringToFront()
+    }
+
+    fun pxToDp(px: Int): Int {
+        return (px / resources.displayMetrics.density).toInt()
     }
 
     fun deleteUserData(user_id: Int) {

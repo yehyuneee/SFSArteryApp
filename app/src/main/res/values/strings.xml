@@ -1,6 +1,6 @@
 <resources>
     <!-- 공통 -->
-    <string name="app_name">SFSArteryApp</string>
+    <string name="app_name">VeinAUTH</string>
     <string name="confirm_text">확인</string>
     <string name="cancel_text">취소</string>
     <string name="camera_permission_denied">카메라 권한 미허용으로 정맥 인증이 불가능합니다.</string>

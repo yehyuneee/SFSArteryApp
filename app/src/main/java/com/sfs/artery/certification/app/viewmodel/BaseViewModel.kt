@@ -39,12 +39,13 @@ abstract class BaseViewModel : ViewModel() {
      */
     fun <A : Any, S : Single<A>> S.doComplete(success: (A) -> Unit, fail: () -> Unit): Disposable {
         val observer: ConsumerSingleObserver<A> = ConsumerSingleObserver({ response ->
+            dismissDialog()
             success.invoke(response)
         }, {
+            dismissDialog()
             fail.invoke()
         })
         subscribe(observer)
-        dismissDialog()
         return observer
     }
 

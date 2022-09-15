@@ -18,7 +18,6 @@ import com.sfs.artery.certification.app.util.ArteryActivityResponse
 import com.sfs.artery.certification.app.util.CommonDialogListener
 import com.sfs.artery.certification.app.util.PermissionListener
 import com.sfs.artery.certification.app.view.HeaderView
-import com.sfs.artery.certification.app.viewmodel.ChangePwViewModel
 import com.sfs.artery.certification.app.viewmodel.SignInViewModel
 import dagger.hilt.android.AndroidEntryPoint
 import jp.co.normee.palmvein.NRPalmViewDesc
@@ -170,7 +169,7 @@ class SignInActivity : BaseActivity<ActivitySignInBinding, SignInViewModel>(),
 
         requestCameraPermission(object : PermissionListener {
             override fun onGranted() {
-                moveArteryActivity<ArteryActivityTest>(setting, requestCode, mResult)
+                moveArteryActivity<ArteryActivity>(setting, requestCode, mResult)
             }
 
             override fun onRefused() {

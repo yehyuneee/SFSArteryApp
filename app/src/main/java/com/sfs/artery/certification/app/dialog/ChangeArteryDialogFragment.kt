@@ -7,15 +7,9 @@ import android.view.View
 import android.view.ViewGroup
 import androidx.fragment.app.DialogFragment
 import com.sfs.artery.certification.app.R
-import com.sfs.artery.certification.app.activity.ArteryActivity
-import com.sfs.artery.certification.app.common.AlertDialogBtnType
 import com.sfs.artery.certification.app.common.ArteryType
 import com.sfs.artery.certification.app.databinding.ChangeArteryLayoutBinding
-import com.sfs.artery.certification.app.extention.moveArteryActivity
 import com.sfs.artery.certification.app.util.ChangeArteryListener
-import com.sfs.artery.certification.app.util.PermissionListener
-import jp.co.normee.palmvein.NRPalmViewDesc
-import kotlin.random.Random
 
 class ChangeArteryDialogFragment(activity: Activity, changeArteryListener: ChangeArteryListener) :
     DialogFragment() {
