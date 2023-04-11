@@ -5,5 +5,4 @@
 * Databinding, ViewModel, LiveData
 * Hilt
 * Rxjava
--- 사용하여 구현
 
